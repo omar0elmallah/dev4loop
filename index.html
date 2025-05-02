@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevConnect - منصة المبرمجين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.css" />
+    <style>
+        :root {
+            --primary-color: #4285F4;
+            --secondary-color: #34A853;
+            --accent-color: #EA4335;
+            --dark-color: #24292E;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* ستايلات صفحة المصادقة */
+        .auth-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        .auth-left {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .auth-left-content {
+            max-width: 500px;
+        }
+        
+        .auth-left h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .auth-left p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-color: white;
+        }
+        
+        .auth-form {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .auth-form h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .auth-btn:hover {
+            background-color: #3367d6;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .auth-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: #777;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .divider::before {
+            margin-right: 1rem;
+        }
+        
+        .divider::after {
+            margin-left: 1rem;
+        }
+        
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .social-btn i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .google-btn {
+            background-color: white;
+            color: #757575;
+        }
+        
+        .google-btn:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .github-btn {
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        .github-btn:hover {
+            background-color: #1a1e22;
+        }
+        
+        /* ستايلات لوحة التحكم */
+        .sidebar {
+            width: 250px;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1.5rem 0;
+            height: 100vh;
+            position: fixed;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-header {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .sidebar-menu {
+            margin-top: 1.5rem;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .menu-item i {
+            margin-left: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-right: 250px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-left: 1rem;
+            cursor: pointer;
+        }
+        
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .notification-icon i {
+            font-size: 1.5rem;
+            color: #777;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+        
+        /* ستايلات تبويب الاستكشاف */
+        .explore-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .posts-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+        
+        .create-post {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .post-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .post-input img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 1rem;
+        }
+        
+        .post-input textarea {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            resize: none;
+            height: 40px;
+            transition: height 0.3s;
+        }
+        
+        .post-input textarea:focus {
+            height: 80px;
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding-right: 60px;
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            color: #777;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .post-action:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .post-action i {
+            margin-left: 0.5rem;
+        }
+        
+        .post {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .post-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 1rem;
+        }
+        
+        .post-user {
+            flex: 1;
+        }
+        
+        .post-user h4 {
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        
+        .post-user span {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .post-menu {
+            color: #777;
+            cursor: pointer;
+        }
+        
+        .post-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .post-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+        }
+        
+        .post-like, .post-comment, .post-share {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .post-like i, .post-comment i, .post-share i {
+            margin-left: 0.5rem;
+        }
+        
+        .post-like.active {
+            color: var(--accent-color);
+        }
+        
+        .sidebar-widget {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .widget-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .trending-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background-color: #f0f2f5;
+            color: var(--dark-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background-color: #e4e6e9;
+        }
+        
+        .suggested-users {
+            margin-top: 1rem;
+        }
+        
+        .user-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .user-item:last-child {
+            border-bottom: none;
+        }
+        
+        .user-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 1rem;
+        }
+        
+        .user-info h4 {
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        
+        .user-info span {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .follow-btn {
+            margin-right: auto;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        /* ستايلات تبويب طلبات الويب */
+        .web-request-form {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group-full {
+            grid-column: span 2;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #3367d6;
+        }
+        
+        .requests-list {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+        
+        .request-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .request-item:last-child {
+            border-bottom: none;
+        }
+        
+        .request-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .request-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .request-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+        
+        .status-in-progress {
+            background-color: #CCE5FF;
+            color: #004085;
+        }
+        
+        .request-meta {
+            display: flex;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .request-meta span {
+            margin-left: 1rem;
+        }
+        
+        .request-description {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .request-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .view-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+        
+        .view-btn:hover {
+            background-color: #3367d6;
+        }
+        
+        .delete-btn {
+            background-color: white;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+        
+        .delete-btn:hover {
+            background-color: #f8d7da;
+        }
+        
+        /* ستايلات الملف الشخصي */
+        .profile-header {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+        }
+        
+        .profile-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-title {
+            color: #777;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-bio {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        
+        .stat-label {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .profile-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .edit-profile-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+        
+        .profile-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            color: #777;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .profile-tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .profile-tab:hover:not(.active) {
+            background-color: #f5f5f5;
+        }
+        
+        .profile-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+        
+        /* ستايلات عامة */
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 992px) {
+            .explore-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+            }
+            
+            .auth-left {
+                padding: 2rem 1rem;
+            }
+            
+            .auth-right {
+                padding: 2rem 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group-full {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- صفحة المصادقة -->
+    <div id="auth-page" class="auth-container">
+        <div class="auth-left">
+            <div class="auth-left-content">
+                <h1>مرحباً بك في DevConnect</h1>
+                <p>منصة المبرمجين للتواصل، مشاركة المعرفة، والعمل على مشاريع مشتركة</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Programming Illustration" width="300">
+            </div>
+        </div>
+        <div class="auth-right">
+            <div class="auth-form">
+                <h2>تسجيل الدخول</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">البريد الإلكتروني</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">كلمة المرور</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="auth-btn">تسجيل الدخول</button>
+                </form>
+                <div class="auth-footer">
+                    <a href="#" id="forgot-password-link">نسيت كلمة المرور؟</a>
+                    <p>ليس لديك حساب؟ <a href="#" id="show-register-link">إنشاء حساب</a></p>
+                </div>
+                <div class="divider">أو</div>
+                <div class="social-login">
+                    <button id="google-login" class="social-btn google-btn">
+                        <i class="fab fa-google"></i>
+                        تسجيل الدخول بجوجل
+                    </button>
+                    <button id="github-login" class="social-btn github-btn">
+                        <i class="fab fa-github"></i>
+                        تسجيل الدخول بجيت هاب
+                    </button>
+                </div>
+            </div>
+            
+            <div id="register-form" class="auth-form hidden">
+                <h2>إنشاء حساب جديد</h2>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">الاسم الكامل</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">البريد الإلكتروني</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">كلمة المرور</label>
+                        <input type="password" id="signup-password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm-password">تأكيد كلمة المرور</label>
+                        <input type="password" id="signup-confirm-password" required minlength="6">
+                    </div>
+                    <button type="submit" class="auth-btn">إنشاء حساب</button>
+                </form>
+                <div class="auth-footer">
+                    <p>لديك حساب بالفعل؟ <a href="#" id="show-login-link">تسجيل الدخول</a></p>
+                </div>
+            </div>
+            
+            <div id="forgot-password-form" class="auth-form hidden">
+                <h2>إعادة تعيين كلمة المرور</h2>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="reset-email">البريد الإلكتروني</label>
+                        <input type="email" id="reset-email" required>
+                    </div>
+                    <button type="submit" class="auth-btn">إرسال رابط التعيين</button>
+                </form>
+                <div class="auth-footer">
+                    <a href="#" id="back-to-login-link">العودة لتسجيل الدخول</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- لوحة التحكم -->
+    <div id="dashboard" class="container hidden">
+        <!-- الشريط الجانبي -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>DevConnect</h3>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active" data-tab="explore">
+                    <i class="fas fa-compass"></i>
+                    <span>استكشف</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="web-requests">
+                    <i class="fas fa-code"></i>
+                    <span>طلبات ويب</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="profile">
+                    <i class="fas fa-user"></i>
+                    <span>ملفي الشخصي</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>الإعدادات</span>
+                </a>
+                <a href="#" class="menu-item" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <!-- شريط العنوان -->
+            <div class="header">
+                <h1 id="page-title">استكشف</h1>
+                <div class="user-menu">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-avatar" id="user-avatar">OM</div>
+                </div>
+            </div>
+            
+            <!-- تبويب الاستكشاف -->
+            <div id="explore-tab" class="tab-content">
+                <div class="explore-container">
+                    <div class="posts-container">
+                        <div class="create-post">
+                            <div class="post-input">
+                                <img src="https://via.placeholder.com/40" alt="User Avatar" id="current-user-avatar">
+                                <textarea placeholder="ماذا تريد أن تشارك اليوم؟"></textarea>
+                            </div>
+                            <div class="post-actions">
+                                <div class="post-action">
+                                    <i class="fas fa-image"></i>
+                                    <span>صورة</span>
+                                </div>
+                                <div class="post-action">
+                                    <i class="fas fa-code"></i>
+                                    <span>كود</span>
+                                </div>
+                                <div class="post-action">
+                                    <i class="fas fa-link"></i>
+                                    <span>رابط</span>
+                                </div>
+                                <div class="post-action">
+                                    <i class="fas fa-video"></i>
+                                    <span>فيديو</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                <div class="post-user">
+                                    <h4>أحمد محمد</h4>
+                                    <span>منذ 3 ساعات</span>
+                                </div>
+                                <div class="post-menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p>أنا أعمل على مشروع جديد باستخدام React و Firebase، وأواجه مشكلة في تكامل المصادقة. هل لدى أحدكم حل لهذه المشكلة؟</p>
+                            </div>
+                            <img src="https://via.placeholder.com/600x300" alt="Post Image" class="post-image">
+                            <div class="post-footer">
+                                <div class="post-like">
+                                    <i class="far fa-heart"></i>
+                                    <span>12 إعجاب</span>
+                                </div>
+                                <div class="post-comment">
+                                    <i class="far fa-comment"></i>
+                                    <span>5 تعليقات</span>
+                                </div>
+                                <div class="post-share">
+                                    <i class="fas fa-share"></i>
+                                    <span>مشاركة</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                <div class="post-user">
+                                    <h4>سارة علي</h4>
+                                    <span>منذ 5 ساعات</span>
+                                </div>
+                                <div class="post-menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p>شاركت للتو مستودع جيت هاب جديد لمكتبة JavaScript صممتها لمعالجة التواريخ بطريقة سهلة. أتمنى أن تجدوا فيها الفائدة!</p>
+                                <pre><code>function formatDate(date, format) {
+    // كود المعالجة هنا
+}</code></pre>
+                            </div>
+                            <div class="post-footer">
+                                <div class="post-like active">
+                                    <i class="fas fa-heart"></i>
+                                    <span>24 إعجاب</span>
+                                </div>
+                                <div class="post-comment">
+                                    <i class="far fa-comment"></i>
+                                    <span>8 تعليقات</span>
+                                </div>
+                                <div class="post-share">
+                                    <i class="fas fa-share"></i>
+                                    <span>مشاركة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-widgets">
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">الوسوم الشائعة</h3>
+                            <div class="trending-tags">
+                                <span class="tag">#JavaScript</span>
+                                <span class="tag">#React</span>
+                                <span class="tag">#Python</span>
+                                <span class="tag">#WebDev</span>
+                                <span class="tag">#Firebase</span>
+                                <span class="tag">#Git</span>
+                                <span class="tag">#CSS</span>
+                                <span class="tag">#NodeJS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="sidebar-widget">
+                            <h3 class="widget-title">مبرمجون قد يعجبونك</h3>
+                            <div class="suggested-users">
+                                <div class="user-item">
+                                    <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                    <div class="user-info">
+                                        <h4>محمد خالد</h4>
+                                        <span>مطور ويب</span>
+                                    </div>
+                                    <button class="follow-btn">متابعة</button>
+                                </div>
+                                <div class="user-item">
+                                    <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                    <div class="user-info">
+                                        <h4>نورا أحمد</h4>
+                                        <span>مصممة واجهات</span>
+                                    </div>
+                                    <button class="follow-btn">متابعة</button>
+                                </div>
+                                <div class="user-item">
+                                    <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                    <div class="user-info">
+                                        <h4>يوسف سمير</h4>
+                                        <span>مطور تطبيقات</span>
+                                    </div>
+                                    <button class="follow-btn">متابعة</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تبويب طلبات الويب -->
+            <div id="web-requests-tab" class="tab-content hidden">
+                <div class="web-request-form">
+                    <h2>طلب موقع ويب جديد</h2>
+                    <form id="request-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="project-name" class="form-label">اسم المشروع</label>
+                                <input type="text" id="project-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-type" class="form-label">نوع الموقع</label>
+                                <select id="project-type" class="form-control" required>
+                                    <option value="">اختر نوع الموقع</option>
+                                    <option value="ecommerce">متجر إلكتروني</option>
+                                    <option value="blog">مدونة</option>
+                                    <option value="portfolio">معرض أعمال</option>
+                                    <option value="business">موقع شركة</option>
+                                    <option value="webapp">تطبيق ويب</option>
+                                    <option value="other">أخرى</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-full">
+                            <label for="project-description" class="form-label">وصف المشروع</label>
+                            <textarea id="project-description" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="project-budget" class="form-label">الميزانية (اختياري)</label>
+                                <input type="text" id="project-budget" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="project-deadline" class="form-label">الموعد النهائي (اختياري)</label>
+                                <input type="date" id="project-deadline" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group form-group-full">
+                            <label for="project-notes" class="form-label">ملاحظات إضافية</label>
+                            <textarea id="project-notes" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">إرسال الطلب</button>
+                    </form>
+                </div>
+                
+                <div class="requests-list">
+                    <h2>طلباتي السابقة</h2>
+                    <div class="request-item">
+                        <div class="request-header">
+                            <h3 class="request-title">موقع متجر إلكتروني للملابس</h3>
+                            <span class="request-status status-completed">مكتمل</span>
+                        </div>
+                        <div class="request-meta">
+                            <span>تم الإنشاء: 15 مايو 2023</span>
+                            <span>الميزانية: $1500</span>
+                        </div>
+                        <div class="request-description">
+                            <p>أحتاج إلى موقع متجر إلكتروني لعرض وبيع الملابس الرجالية. يجب أن يحتوي على نظام دفع إلكتروني، صفحة لكل منتج، نظام تقييم، وإمكانية تتبع الطلبات.</p>
+                        </div>
+                        <div class="request-actions">
+                            <button class="action-btn view-btn">عرض التفاصيل</button>
+                            <button class="action-btn delete-btn">حذف</button>
+                        </div>
+                    </div>
+                    
+                    <div class="request-item">
+                        <div class="request-header">
+                            <h3 class="request-title">موقع شخصي لعرض الأعمال</h3>
+                            <span class="request-status status-in-progress">قيد التنفيذ</span>
+                        </div>
+                        <div class="request-meta">
+                            <span>تم الإنشاء: 2 يونيو 2023</span>
+                            <span>الميزانية: $800</span>
+                        </div>
+                        <div class="request-description">
+                            <p>أبحث عن مصمم لإنشاء موقع شخصي لعرض أعمالي في التصميم الجرافيكي. يجب أن يحتوي على معرض لأعمالي، معلومات عني، وسيلة للتواصل، ومدونة بسيطة.</p>
+                        </div>
+                        <div class="request-actions">
+                            <button class="action-btn view-btn">عرض التفاصيل</button>
+                            <button class="action-btn delete-btn">حذف</button>
+                        </div>
+                    </div>
+                    
+                    <div class="request-item">
+                        <div class="request-header">
+                            <h3 class="request-title">تطبيق ويب لإدارة المهام</h3>
+                            <span class="request-status status-pending">قيد المراجعة</span>
+                        </div>
+                        <div class="request-meta">
+                            <span>تم الإنشاء: 10 يونيو 2023</span>
+                            <span>الميزانية: $2000</span>
+                        </div>
+                        <div class="request-description">
+                            <p>أحتاج إلى تطبيق ويب متكامل لإدارة المهام لفريق العمل الخاص بي. يجب أن يحتوي على ميزات مثل إنشاء المهام، تعيينها لأعضاء الفريق، متابعة التقدم، وإشعارات.</p>
+                        </div>
+                        <div class="request-actions">
+                            <button class="action-btn view-btn">عرض التفاصيل</button>
+                            <button class="action-btn delete-btn">حذف</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تبويب الملف الشخصي -->
+            <div id="profile-tab" class="tab-content hidden">
+                <div class="profile-header">
+                    <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-avatar">
+                    <h1 class="profile-name">عمر الملاح</h1>
+                    <p class="profile-title">مطور ويب ومصمم واجهات</p>
+                    <p class="profile-bio">أنا مطور ويب بخبرة 5 سنوات في تطوير تطبيقات الويب باستخدام التقنيات الحديثة مثل React, Node.js, و Firebase. أحب مشاركة معرفتي مع الآخرين والعمل على مشاريع مميزة.</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">142</div>
+                            <div class="stat-label">متابعون</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">87</div>
+                            <div class="stat-label">متابَعون</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">مشاريع</div>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="edit-profile-btn">تعديل الملف الشخصي</button>
+                    </div>
+                </div>
+                
+                <div class="profile-tabs">
+                    <div class="profile-tab active" data-profile-tab="posts">المشاركات</div>
+                    <div class="profile-tab" data-profile-tab="projects">المشاريع</div>
+                    <div class="profile-tab" data-profile-tab="about">معلومات عني</div>
+                </div>
+                
+                <div class="profile-content">
+                    <div id="profile-posts" class="profile-tab-content">
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                <div class="post-user">
+                                    <h4>عمر الملاح</h4>
+                                    <span>منذ يومين</span>
+                                </div>
+                                <div class="post-menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p>شاركت للتو مشروعي الجديد على GitHub! إنها مكتبة لتحسين أداء تطبيقات React. يمكنكم تجربتها وإبداء آرائكم.</p>
+                                <pre><code>import { useOptimize } from 'react-optimizer';</code></pre>
+                            </div>
+                            <div class="post-footer">
+                                <div class="post-like">
+                                    <i class="far fa-heart"></i>
+                                    <span>32 إعجاب</span>
+                                </div>
+                                <div class="post-comment">
+                                    <i class="far fa-comment"></i>
+                                    <span>14 تعليق</span>
+                                </div>
+                                <div class="post-share">
+                                    <i class="fas fa-share"></i>
+                                    <span>مشاركة</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <div class="post-header">
+                                <img src="https://via.placeholder.com/40" alt="User Avatar">
+                                <div class="post-user">
+                                    <h4>عمر الملاح</h4>
+                                    <span>منذ أسبوع</span>
+                                </div>
+                                <div class="post-menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p>أبحث عن مطورين لمساعدتي في مشروع مفتوح المصدر لتطوير منصة تعليمية للمبرمجين المبتدئين. إذا كنتم مهتمين، راسلوني!</p>
+                            </div>
+                            <img src="https://via.placeholder.com/600x300" alt="Post Image" class="post-image">
+                            <div class="post-footer">
+                                <div class="post-like active">
+                                    <i class="fas fa-heart"></i>
+                                    <span>45 إعجاب</span>
+                                </div>
+                                <div class="post-comment">
+                                    <i class="far fa-comment"></i>
+                                    <span>22 تعليق</span>
+                                </div>
+                                <div class="post-share">
+                                    <i class="fas fa-share"></i>
+                                    <span>مشاركة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="profile-projects" class="profile-tab-content hidden">
+                        <p>قائمة المشاريع ستظهر هنا</p>
+                    </div>
+                    
+                    <div id="profile-about" class="profile-tab-content hidden">
+                        <div class="about-section">
+                            <h3>معلومات أساسية</h3>
+                            <div class="about-item">
+                                <strong>البلد:</strong> مصر
+                            </div>
+                            <div class="about-item">
+                                <strong>المدينة:</strong> القاهرة
+                            </div>
+                            <div class="about-item">
+                                <strong>الوظيفة:</strong> مطور ويب مستقل
+                            </div>
+                        </div>
+                        
+                        <div class="about-section">
+                            <h3>المهارات</h3>
+                            <div class="skills-list">
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">Firebase</span>
+                                <span class="skill-tag">HTML/CSS</span>
+                                <span class="skill-tag">Git</span>
+                            </div>
+                        </div>
+                        
+                        <div class="about-section">
+                            <h3>التعليم</h3>
+                            <div class="education-item">
+                                <strong>بكالوريوس علوم الحاسب</strong>
+                                <p>جامعة القاهرة, 2015 - 2019</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تبويب الإعدادات -->
+            <div id="settings-tab" class="tab-content hidden">
+                <div class="settings-container">
+                    <h2>الإعدادات</h2>
+                    <div class="settings-section">
+                        <h3>الحساب</h3>
+                        <div class="setting-item">
+                            <label>البريد الإلكتروني</label>
+                            <p>omar.elmallah2011@gmail.com</p>
+                            <button class="edit-btn">تغيير</button>
+                        </div>
+                        <div class="setting-item">
+                            <label>كلمة المرور</label>
+                            <p>********</p>
+                            <button class="edit-btn">تغيير</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>التفضيلات</h3>
+                        <div class="setting-item">
+                            <label>اللغة</label>
+                            <select class="settings-select">
+                                <option value="ar" selected>العربية</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>وضع الظلام</label>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>الإشعارات</h3>
+                        <div class="setting-item">
+                            <label>إشعارات البريد الإلكتروني</label>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>إشعارات التطبيق</label>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="save-settings-btn">حفظ التغييرات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfXJ-2tmCYo-pQjfN_4nAdxC-NcqfjAlo",
+            authDomain: "tamec-8f9ea.firebaseapp.com",
+            projectId: "tamec-8f9ea",
+            storageBucket: "tamec-8f9ea.appspot.com",
+            messagingSenderId: "372610375354",
+            appId: "1:372610375354:web:1beaff9695e7b49cdeec83",
+            measurementId: "G-W7TT6VTKSP"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const storage = firebase.storage();
+
+        // عناصر DOM
+        const authPage = document.getElementById('auth-page');
+        const dashboard = document.getElementById('dashboard');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const signupForm = document.getElementById('signup-form');
+        const forgotPasswordForm = document.getElementById('forgot-password-form');
+        const resetPasswordForm = document.getElementById('reset-password-form');
+        const showRegisterLink = document.getElementById('show-register-link');
+        const showLoginLink = document.getElementById('show-login-link');
+        const forgotPasswordLink = document.getElementById('forgot-password-link');
+        const backToLoginLink = document.getElementById('back-to-login-link');
+        const googleLoginBtn = document.getElementById('google-login');
+        const githubLoginBtn = document.getElementById('github-login');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userAvatar = document.getElementById('user-avatar');
+        const currentUserAvatar = document.getElementById('current-user-avatar');
+        const menuItems = document.querySelectorAll('.menu-item');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const pageTitle = document.getElementById('page-title');
+        const profileTabs = document.querySelectorAll('.profile-tab');
+        const profileTabContents = document.querySelectorAll('.profile-tab-content');
+
+        // معالجة تسجيل الدخول
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // تسجيل الدخول ناجح
+                    showDashboard(userCredential.user);
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+
+        // معالجة إنشاء حساب
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('كلمة المرور غير متطابقة');
+                return;
+            }
+            
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // حفظ بيانات المستخدم الإضافية
+                    return db.collection('users').doc(userCredential.user.uid).set({
+                        name: name,
+                        email: email,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    // تسجيل الدخول بعد إنشاء الحساب
+                    showDashboard(auth.currentUser);
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+
+        // معالجة إعادة تعيين كلمة المرور
+        resetPasswordForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('reset-email').value;
+            
+            auth.sendPasswordResetEmail(email)
+                .then(() => {
+                    alert('تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني');
+                    showLoginForm();
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+
+        // تسجيل الدخول بجوجل
+        googleLoginBtn.addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then((userCredential) => {
+                    showDashboard(userCredential.user);
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+
+        // تسجيل الدخول بجيت هاب
+        githubLoginBtn.addEventListener('click', () => {
+            const provider = new firebase.auth.GithubAuthProvider();
+            auth.signInWithPopup(provider)
+                .then((userCredential) => {
+                    showDashboard(userCredential.user);
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+
+        // تسجيل الخروج
+        logoutBtn.addEventListener('click', () => {
+            auth.signOut()
+                .then(() => {
+                    authPage.classList.remove('hidden');
+                    dashboard.classList.add('hidden');
+                    showLoginForm();
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+
+        // تبديل بين نماذج المصادقة
+        showRegisterLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRegisterForm();
+        });
+
+        showLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginForm();
+        });
+
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showForgotPasswordForm();
+        });
+
+        backToLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginForm();
+        });
+
+        // تبديل بين تبويبات لوحة التحكم
+        menuItems.forEach(item => {
+            if (item.dataset.tab) {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // إزالة التنشيط من جميع العناصر
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    
+                    // تنشيط العنصر الحالي
+                    item.classList.add('active');
+                    
+                    // إخفاء جميع المحتويات
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // إظهار المحتوى المطلوب
+                    const tabId = `${item.dataset.tab}-tab`;
+                    document.getElementById(tabId).classList.remove('hidden');
+                    
+                    // تحديث عنوان الصفحة
+                    pageTitle.textContent = item.querySelector('span').textContent;
+                });
+            }
+        });
+
+        // تبديل بين تبويبات الملف الشخصي
+        profileTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // إزالة التنشيط من جميع العناصر
+                profileTabs.forEach(t => t.classList.remove('active'));
+                
+                // تنشيط العنصر الحالي
+                tab.classList.add('active');
+                
+                // إخفاء جميع المحتويات
+                profileTabContents.forEach(content => content.classList.add('hidden'));
+                
+                // إظهار المحتوى المطلوب
+                const tabId = `profile-${tab.dataset.profileTab}`;
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+
+        // عرض لوحة التحكم
+        function showDashboard(user) {
+            authPage.classList.add('hidden');
+            dashboard.classList.remove('hidden');
+            
+            // تحديث صورة المستخدم
+            if (user.photoURL) {
+                userAvatar.style.backgroundImage = `url(${user.photoURL})`;
+                currentUserAvatar.src = user.photoURL;
+            } else {
+                // استخدام الحرف الأول من الاسم إذا لم تكن هناك صورة
+                const name = user.displayName || user.email;
+                userAvatar.textContent = name ? name.charAt(0).toUpperCase() : 'U';
+            }
+        }
+
+        // عرض نموذج تسجيل الدخول
+        function showLoginForm() {
+            registerForm.classList.add('hidden');
+            forgotPasswordForm.classList.add('hidden');
+            loginForm.parentElement.classList.remove('hidden');
+        }
+
+        // عرض نموذج إنشاء حساب
+        function showRegisterForm() {
+            loginForm.parentElement.classList.add('hidden');
+            forgotPasswordForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+        }
+
+        // عرض نموذج نسيان كلمة المرور
+        function showForgotPasswordForm() {
+            loginForm.parentElement.classList.add('hidden');
+            registerForm.classList.add('hidden');
+            forgotPasswordForm.classList.remove('hidden');
+        }
+
+        // التحقق من حالة المصادقة عند تحميل الصفحة
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                showDashboard(user);
+            } else {
+                authPage.classList.remove('hidden');
+                dashboard.classList.add('hidden');
+                showLoginForm();
+            }
+        });
+
+        // إدارة طلبات الويب
+        const requestForm = document.getElementById('request-form');
+        requestForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            const projectName = document.getElementById('project-name').value;
+            const projectType = document.getElementById('project-type').value;
+            const projectDescription = document.getElementById('project-description').value;
+            const projectBudget = document.getElementById('project-budget').value;
+            const projectDeadline = document.getElementById('project-deadline').value;
+            const projectNotes = document.getElementById('project-notes').value;
+            
+            db.collection('webRequests').add({
+                userId: user.uid,
+                projectName: projectName,
+                projectType: projectType,
+                projectDescription: projectDescription,
+                projectBudget: projectBudget,
+                projectDeadline: projectDeadline,
+                projectNotes: projectNotes,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                alert('تم إرسال طلبك بنجاح!');
+                requestForm.reset();
+                
+                // إرسال البريد الإلكتروني (هنا يمكنك استخدام خدمة مثل SendGrid)
+                sendEmailToAdmin(user.email, projectName, projectDescription);
+            })
+            .catch((error) => {
+                alert('حدث خطأ أثناء إرسال الطلب: ' + error.message);
+            });
+        });
+
+        // وظيفة لإرسال البريد الإلكتروني (وهمية - تحتاج إلى تنفيذ حقيقي باستخدام خدمة مثل SendGrid)
+        function sendEmailToAdmin(userEmail, projectName, projectDescription) {
+            console.log('إرسال بريد إلى المدير:', {
+                to: 'omar.elmallah2011@gmail.com',
+                subject: `طلب موقع جديد: ${projectName}`,
+                text: `تم استلام طلب موقع جديد من ${userEmail}:\n\n${projectDescription}`
+            });
+            
+            // في الواقع، هنا ستستخدم خدمة إرسال بريد إلكتروني
+            // يمكنك استخدام Cloud Functions لتنفيذ هذا
+        }
+
+        // تحميل طلبات المستخدم
+        function loadUserRequests() {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            db.collection('webRequests')
+                .where('userId', '==', user.uid)
+                .orderBy('createdAt', 'desc')
+                .get()
+                .then((querySnapshot) => {
+                    const requestsList = document.querySelector('.requests-list');
+                    requestsList.innerHTML = '<h2>طلباتي السابقة</h2>';
+                    
+                    if (querySnapshot.empty) {
+                        requestsList.innerHTML += '<p>لا توجد طلبات سابقة</p>';
+                        return;
+                    }
+                    
+                    querySnapshot.forEach((doc) => {
+                        const request = doc.data();
+                        const requestId = doc.id;
+                        
+                        const statusClass = `status-${request.status.replace(' ', '-')}`;
+                        
+                        const requestItem = document.createElement('div');
+                        requestItem.className = 'request-item';
+                        requestItem.innerHTML = `
+                            <div class="request-header">
+                                <h3 class="request-title">${request.projectName}</h3>
+                                <span class="request-status ${statusClass}">${getStatusText(request.status)}</span>
+                            </div>
+                            <div class="request-meta">
+                                <span>تم الإنشاء: ${formatDate(request.createdAt?.toDate())}</span>
+                                ${request.projectBudget ? `<span>الميزانية: ${request.projectBudget}</span>` : ''}
+                            </div>
+                            <div class="request-description">
+                                <p>${request.projectDescription}</p>
+                            </div>
+                            <div class="request-actions">
+                                <button class="action-btn view-btn">عرض التفاصيل</button>
+                                <button class="action-btn delete-btn" data-id="${requestId}">حذف</button>
+                            </div>
+                        `;
+                        
+                        requestsList.appendChild(requestItem);
+                    });
+                    
+                    // إضافة معالجات الأحداث لأزرار الحذف
+                    document.querySelectorAll('.delete-btn').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const requestId = btn.dataset.id;
+                            deleteRequest(requestId);
+                        });
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error loading requests: ', error);
+                });
+        }
+
+        // حذف طلب
+        function deleteRequest(requestId) {
+            if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
+                db.collection('webRequests').doc(requestId).delete()
+                    .then(() => {
+                        alert('تم حذف الطلب بنجاح');
+                        loadUserRequests();
+                    })
+                    .catch((error) => {
+                        alert('حدث خطأ أثناء حذف الطلب: ' + error.message);
+                    });
+            }
+        }
+
+        // تحويل حالة الطلب إلى نص
+        function getStatusText(status) {
+            const statusMap = {
+                'pending': 'قيد المراجعة',
+                'in-progress': 'قيد التنفيذ',
+                'completed': 'مكتمل'
+            };
+            return statusMap[status] || status;
+        }
+
+        // تنسيق التاريخ
+        function formatDate(date) {
+            if (!date) return '';
+            return date.toLocaleDateString('ar-EG');
+        }
+
+        // تحميل المنشورات
+        function loadPosts() {
+            db.collection('posts')
+                .orderBy('createdAt', 'desc')
+                .limit(10)
+                .get()
+                .then((querySnapshot) => {
+                    const postsContainer = document.querySelector('.posts-container');
+                    // مسح المنشورات القديمة (باستثناء نموذج إنشاء المنشور)
+                    const createPost = postsContainer.querySelector('.create-post');
+                    postsContainer.innerHTML = '';
+                    postsContainer.appendChild(createPost);
+                    
+                    if (querySnapshot.empty) {
+                        postsContainer.innerHTML += '<p>لا توجد منشورات بعد</p>';
+                        return;
+                    }
+                    
+                    querySnapshot.forEach((doc) => {
+                        const post = doc.data();
+                        const postId = doc.id;
+                        
+                        const postElement = document.createElement('div');
+                        postElement.className = 'post';
+                        postElement.innerHTML = `
+                            <div class="post-header">
+                                <img src="${post.authorPhoto || 'https://via.placeholder.com/40'}" alt="User Avatar">
+                                <div class="post-user">
+                                    <h4>${post.authorName}</h4>
+                                    <span>${formatTime(post.createdAt?.toDate())}</span>
+                                </div>
+                                <div class="post-menu">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <p>${post.content}</p>
+                                ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Post Image" class="post-image">` : ''}
+                                ${post.code ? `<pre><code>${post.code}</code></pre>` : ''}
+                            </div>
+                            <div class="post-footer">
+                                <div class="post-like" data-id="${postId}">
+                                    <i class="far fa-heart"></i>
+                                    <span>${post.likes || 0} إعجاب</span>
+                                </div>
+                                <div class="post-comment">
+                                    <i class="far fa-comment"></i>
+                                    <span>${post.comments || 0} تعليقات</span>
+                                </div>
+                                <div class="post-share">
+                                    <i class="fas fa-share"></i>
+                                    <span>مشاركة</span>
+                                </div>
+                            </div>
+                        `;
+                        
+                        postsContainer.appendChild(postElement);
+                    });
+                    
+                    // إضافة معالجات الأحداث لأزرار الإعجاب
+                    document.querySelectorAll('.post-like').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const postId = btn.dataset.id;
+                            likePost(postId);
+                        });
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error loading posts: ', error);
+                });
+        }
+
+        // الإعجاب بمنشور
+        function likePost(postId) {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            const postRef = db.collection('posts').doc(postId);
+            
+            db.runTransaction((transaction) => {
+                return transaction.get(postRef).then((postDoc) => {
+                    if (!postDoc.exists) {
+                        throw new Error('المنشور غير موجود');
+                    }
+                    
+                    const postData = postDoc.data();
+                    const likes = postData.likes || 0;
+                    
+                    transaction.update(postRef, {
+                        likes: likes + 1
+                    });
+                });
+            })
+            .then(() => {
+                console.log('تم تحديث عدد الإعجابات بنجاح');
+                loadPosts();
+            })
+            .catch((error) => {
+                console.error('Error liking post: ', error);
+            });
+        }
+
+        // تنسيق الوقت (منذ كم دقيقة/ساعة/يوم)
+        function formatTime(date) {
+            if (!date) return '';
+            
+            const now = new Date();
+            const diff = now - date;
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            
+            if (days > 0) return `منذ ${days} يوم`;
+            if (hours > 0) return `منذ ${hours} ساعة`;
+            if (minutes > 0) return `منذ ${minutes} دقيقة`;
+            return 'الآن';
+        }
+
+        // إنشاء منشور جديد
+        const postInput = document.querySelector('.post-input textarea');
+        const postActions = document.querySelectorAll('.post-action');
+        
+        postInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                createPost();
+            }
+        });
+        
+        postActions.forEach(action => {
+            action.addEventListener('click', (e) => {
+                e.preventDefault();
+                const type = action.querySelector('span').textContent;
+                alert(`سيتم إضافة ${type} إلى المنشور`);
+            });
+        });
+
+        function createPost() {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            const content = postInput.value.trim();
+            if (!content) return;
+            
+            db.collection('posts').add({
+                authorId: user.uid,
+                authorName: user.displayName || user.email,
+                authorPhoto: user.photoURL,
+                content: content,
+                likes: 0,
+                comments: 0,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(() => {
+                postInput.value = '';
+                loadPosts();
+            })
+            .catch((error) => {
+                alert('حدث خطأ أثناء نشر المنشور: ' + error.message);
+            });
+        }
+
+        // تحميل البيانات الأولية عند تسجيل الدخول
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                showDashboard(user);
+                loadPosts();
+                loadUserRequests();
+            }
+        });
+    </script>
+</body>
+</html>
