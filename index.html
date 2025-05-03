@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevConnect - منصة المبرمجين</title>
+    <title>DevConnect - منصة المبرمجين العربية</title>
+    <meta name="description" content="منصة عربية للمبرمجين والمطورين للتواصل، مشاركة المعرفة، والعمل على مشاريع مشتركة. تعلم البرمجة، شارك مشاريعك، وكن جزءًا من مجتمع المطورين العرب.">
+    <meta name="keywords" content="برمجة, مطورين, تعلم برمجة, مشاريع برمجية, مجتمع مبرمجين, تطوير ويب, تطبيقات, جافاسكريبت, بايثون">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -17,6 +19,9 @@
             --light-color: #f8f9fa;
             --text-color: #333;
             --border-color: #ddd;
+            --dark-mode-bg: #121212;
+            --dark-mode-card: #1e1e1e;
+            --dark-mode-text: #f0f0f0;
         }
         
         * {
@@ -29,6 +34,12 @@
         body {
             background-color: var(--light-color);
             color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body.dark-mode {
+            background-color: var(--dark-mode-bg);
+            color: var(--dark-mode-text);
         }
         
         .container {
@@ -77,6 +88,10 @@
             background-color: white;
         }
         
+        .dark-mode .auth-right {
+            background-color: var(--dark-mode-card);
+        }
+        
         .auth-form {
             width: 100%;
             max-width: 400px;
@@ -89,6 +104,10 @@
             text-align: center;
         }
         
+        .dark-mode .auth-form h2 {
+            color: var(--dark-mode-text);
+        }
+        
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -99,6 +118,10 @@
             font-weight: 500;
         }
         
+        .dark-mode .form-group label {
+            color: var(--dark-mode-text);
+        }
+        
         .form-group input {
             width: 100%;
             padding: 0.8rem 1rem;
@@ -106,6 +129,14 @@
             border-radius: 4px;
             font-size: 1rem;
             transition: border 0.3s;
+            background-color: white;
+            color: var(--text-color);
+        }
+        
+        .dark-mode .form-group input {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: var(--dark-mode-text);
         }
         
         .form-group input:focus {
@@ -145,6 +176,10 @@
             text-decoration: underline;
         }
         
+        .dark-mode .auth-footer p {
+            color: var(--dark-mode-text);
+        }
+        
         .divider {
             display: flex;
             align-items: center;
@@ -152,10 +187,19 @@
             color: #777;
         }
         
+        .dark-mode .divider {
+            color: #aaa;
+        }
+        
         .divider::before, .divider::after {
             content: "";
             flex: 1;
             border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dark-mode .divider::before, 
+        .dark-mode .divider::after {
+            border-bottom-color: #444;
         }
         
         .divider::before {
@@ -185,6 +229,10 @@
             transition: background-color 0.3s;
         }
         
+        .dark-mode .social-btn {
+            border-color: #444;
+        }
+        
         .social-btn i {
             margin-right: 0.5rem;
             font-size: 1.2rem;
@@ -195,8 +243,17 @@
             color: #757575;
         }
         
+        .dark-mode .google-btn {
+            background-color: #2d2d2d;
+            color: var(--dark-mode-text);
+        }
+        
         .google-btn:hover {
             background-color: #f5f5f5;
+        }
+        
+        .dark-mode .google-btn:hover {
+            background-color: #333;
         }
         
         .github-btn {
@@ -259,6 +316,10 @@
             transition: all 0.3s;
         }
         
+        .dark-mode .main-content {
+            background-color: var(--dark-mode-bg);
+        }
+        
         .header {
             display: flex;
             justify-content: space-between;
@@ -268,9 +329,17 @@
             border-bottom: 1px solid var(--border-color);
         }
         
+        .dark-mode .header {
+            border-bottom-color: #444;
+        }
+        
         .header h1 {
             font-size: 1.8rem;
             color: var(--dark-color);
+        }
+        
+        .dark-mode .header h1 {
+            color: var(--dark-mode-text);
         }
         
         .user-menu {
@@ -302,6 +371,10 @@
             color: #777;
         }
         
+        .dark-mode .notification-icon i {
+            color: #aaa;
+        }
+        
         .notification-badge {
             position: absolute;
             top: -5px;
@@ -331,10 +404,19 @@
             padding: 1.5rem;
         }
         
+        .dark-mode .posts-container {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
         .create-post {
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dark-mode .create-post {
+            border-bottom-color: #444;
         }
         
         .post-input {
@@ -358,6 +440,14 @@
             resize: none;
             height: 40px;
             transition: height 0.3s;
+            background-color: white;
+            color: var(--text-color);
+        }
+        
+        .dark-mode .post-input textarea {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: var(--dark-mode-text);
         }
         
         .post-input textarea:focus {
@@ -382,8 +472,16 @@
             transition: all 0.3s;
         }
         
+        .dark-mode .post-action {
+            color: #aaa;
+        }
+        
         .post-action:hover {
             background-color: #f5f5f5;
+        }
+        
+        .dark-mode .post-action:hover {
+            background-color: #333;
         }
         
         .post-action i {
@@ -394,6 +492,10 @@
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dark-mode .post {
+            border-bottom-color: #444;
         }
         
         .post-header {
@@ -418,9 +520,17 @@
             margin-bottom: 0.2rem;
         }
         
+        .dark-mode .post-user h4 {
+            color: var(--dark-mode-text);
+        }
+        
         .post-user span {
             font-size: 0.8rem;
             color: #777;
+        }
+        
+        .dark-mode .post-user span {
+            color: #aaa;
         }
         
         .post-menu {
@@ -428,9 +538,17 @@
             cursor: pointer;
         }
         
+        .dark-mode .post-menu {
+            color: #aaa;
+        }
+        
         .post-content {
             margin-bottom: 1rem;
             line-height: 1.6;
+        }
+        
+        .dark-mode .post-content {
+            color: var(--dark-mode-text);
         }
         
         .post-image {
@@ -443,6 +561,10 @@
             display: flex;
             justify-content: space-between;
             color: #777;
+        }
+        
+        .dark-mode .post-footer {
+            color: #aaa;
         }
         
         .post-like, .post-comment, .post-share {
@@ -467,11 +589,21 @@
             margin-bottom: 2rem;
         }
         
+        .dark-mode .sidebar-widget {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
         .widget-title {
             font-size: 1.2rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dark-mode .widget-title {
+            color: var(--dark-mode-text);
+            border-bottom-color: #444;
         }
         
         .trending-tags {
@@ -490,8 +622,17 @@
             transition: all 0.3s;
         }
         
+        .dark-mode .tag {
+            background-color: #333;
+            color: var(--dark-mode-text);
+        }
+        
         .tag:hover {
             background-color: #e4e6e9;
+        }
+        
+        .dark-mode .tag:hover {
+            background-color: #444;
         }
         
         .suggested-users {
@@ -503,6 +644,10 @@
             align-items: center;
             padding: 0.8rem 0;
             border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dark-mode .user-item {
+            border-bottom-color: #444;
         }
         
         .user-item:last-child {
@@ -521,9 +666,17 @@
             margin-bottom: 0.2rem;
         }
         
+        .dark-mode .user-info h4 {
+            color: var(--dark-mode-text);
+        }
+        
         .user-info span {
             font-size: 0.8rem;
             color: #777;
+        }
+        
+        .dark-mode .user-info span {
+            color: #aaa;
         }
         
         .follow-btn {
@@ -546,6 +699,11 @@
             margin-bottom: 2rem;
         }
         
+        .dark-mode .web-request-form {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -563,12 +721,24 @@
             font-weight: 500;
         }
         
+        .dark-mode .form-label {
+            color: var(--dark-mode-text);
+        }
+        
         .form-control {
             width: 100%;
             padding: 0.8rem 1rem;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 1rem;
+            background-color: white;
+            color: var(--text-color);
+        }
+        
+        .dark-mode .form-control {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: var(--dark-mode-text);
         }
         
         .form-control:focus {
@@ -604,9 +774,18 @@
             padding: 1.5rem;
         }
         
+        .dark-mode .requests-list {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
         .request-item {
             padding: 1.5rem 0;
             border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dark-mode .request-item {
+            border-bottom-color: #444;
         }
         
         .request-item:last-child {
@@ -655,6 +834,10 @@
             color: #777;
         }
         
+        .dark-mode .request-meta {
+            color: #aaa;
+        }
+        
         .request-meta span {
             margin-left: 1rem;
         }
@@ -662,6 +845,10 @@
         .request-description {
             line-height: 1.6;
             margin-bottom: 1rem;
+        }
+        
+        .dark-mode .request-description {
+            color: var(--dark-mode-text);
         }
         
         .request-actions {
@@ -693,8 +880,16 @@
             border: 1px solid var(--accent-color);
         }
         
+        .dark-mode .delete-btn {
+            background-color: #2d2d2d;
+        }
+        
         .delete-btn:hover {
             background-color: #f8d7da;
+        }
+        
+        .dark-mode .delete-btn:hover {
+            background-color: #443;
         }
         
         /* ستايلات الملف الشخصي */
@@ -705,6 +900,11 @@
             padding: 2rem;
             text-align: center;
             margin-bottom: 2rem;
+        }
+        
+        .dark-mode .profile-header {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
         .profile-avatar {
@@ -720,15 +920,27 @@
             margin-bottom: 0.5rem;
         }
         
+        .dark-mode .profile-name {
+            color: var(--dark-mode-text);
+        }
+        
         .profile-title {
             color: #777;
             margin-bottom: 1rem;
+        }
+        
+        .dark-mode .profile-title {
+            color: #aaa;
         }
         
         .profile-bio {
             max-width: 600px;
             margin: 0 auto 1.5rem;
             line-height: 1.6;
+        }
+        
+        .dark-mode .profile-bio {
+            color: var(--dark-mode-text);
         }
         
         .profile-stats {
@@ -748,9 +960,17 @@
             margin-bottom: 0.2rem;
         }
         
+        .dark-mode .stat-number {
+            color: var(--dark-mode-text);
+        }
+        
         .stat-label {
             color: #777;
             font-size: 0.9rem;
+        }
+        
+        .dark-mode .stat-label {
+            color: #aaa;
         }
         
         .profile-actions {
@@ -776,12 +996,20 @@
             margin-bottom: 2rem;
         }
         
+        .dark-mode .profile-tabs {
+            border-bottom-color: #444;
+        }
+        
         .profile-tab {
             padding: 0.8rem 1.5rem;
             cursor: pointer;
             color: #777;
             font-weight: 500;
             transition: all 0.3s;
+        }
+        
+        .dark-mode .profile-tab {
+            color: #aaa;
         }
         
         .profile-tab.active {
@@ -793,6 +1021,10 @@
             background-color: #f5f5f5;
         }
         
+        .dark-mode .profile-tab:hover:not(.active) {
+            background-color: #333;
+        }
+        
         .profile-content {
             background-color: white;
             border-radius: 8px;
@@ -800,9 +1032,620 @@
             padding: 1.5rem;
         }
         
+        .dark-mode .profile-content {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* ستايلات الإعدادات */
+        .settings-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+        }
+        
+        .dark-mode .settings-container {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .settings-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dark-mode .settings-section {
+            border-bottom-color: #444;
+        }
+        
+        .settings-section h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .dark-mode .settings-section h3 {
+            color: var(--dark-mode-text);
+        }
+        
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .setting-item label {
+            font-weight: 500;
+        }
+        
+        .dark-mode .setting-item label {
+            color: var(--dark-mode-text);
+        }
+        
+        .setting-item p {
+            color: #777;
+        }
+        
+        .dark-mode .setting-item p {
+            color: #aaa;
+        }
+        
+        .edit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        .settings-select {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            color: var(--text-color);
+        }
+        
+        .dark-mode .settings-select {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: var(--dark-mode-text);
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--primary-color);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        
+        .save-settings-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        /* الصفحات القانونية */
+        .legal-page {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .dark-mode .legal-page {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .legal-page h1 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .dark-mode .legal-page h1 {
+            color: var(--primary-color);
+        }
+        
+        .legal-page h2 {
+            margin: 1.5rem 0 1rem;
+            color: var(--dark-color);
+        }
+        
+        .dark-mode .legal-page h2 {
+            color: var(--dark-mode-text);
+        }
+        
+        .legal-page p {
+            margin-bottom: 1rem;
+        }
+        
+        .dark-mode .legal-page p {
+            color: var(--dark-mode-text);
+        }
+        
+        .legal-page ul {
+            margin-bottom: 1rem;
+            padding-right: 1.5rem;
+        }
+        
+        /* القائمة الجانبية للهاتف */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+            margin-left: 1rem;
+        }
+        
+        .dark-mode .menu-toggle {
+            color: var(--dark-mode-text);
+        }
+        
+        /* إعلانات AdSense */
+        .ad-container {
+            width: 100%;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px dashed #ccc;
+        }
+        
+        .dark-mode .ad-container {
+            background-color: #2d2d2d;
+            border-color: #444;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dark-mode .ad-label {
+            color: #aaa;
+        }
+        
+        /* الصفحة الرئيسية */
+        .home-page {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .home-page h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .home-page p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .dark-mode .feature-card {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .dark-mode .feature-card h3 {
+            color: var(--dark-mode-text);
+        }
+        
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .dark-mode .feature-card p {
+            color: #aaa;
+        }
+        
+        /* صفحة المقالات */
+        .articles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .article-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .dark-mode .article-card {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .article-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .dark-mode .article-title {
+            color: var(--dark-mode-text);
+        }
+        
+        .article-excerpt {
+            color: #777;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .dark-mode .article-excerpt {
+            color: #aaa;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            color: #777;
+            font-size: 0.8rem;
+        }
+        
+        .dark-mode .article-meta {
+            color: #aaa;
+        }
+        
+        .article-author {
+            margin-left: 0.5rem;
+        }
+        
+        /* صفحة المقال المفرد */
+        .article-page {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .dark-mode .article-page {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .article-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .article-header h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .dark-mode .article-header h1 {
+            color: var(--dark-mode-text);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #777;
+        }
+        
+        .article-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content {
+            line-height: 1.8;
+        }
+        
+        .dark-mode .article-content {
+            color: var(--dark-mode-text);
+        }
+        
+        .article-content h2, 
+        .article-content h3 {
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .article-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .article-content pre {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        .dark-mode .article-content pre {
+            background-color: #2d2d2d;
+        }
+        
+        .article-content code {
+            font-family: monospace;
+        }
+        
+        /* التعليقات */
+        .comments-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .dark-mode .comments-section {
+            background-color: var(--dark-mode-card);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .comments-section h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .comment-form {
+            margin-bottom: 2rem;
+        }
+        
+        .comment-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .dark-mode .comment-form textarea {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: var(--dark-mode-text);
+        }
+        
+        .comment {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dark-mode .comment {
+            border-bottom-color: #444;
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 1rem;
+        }
+        
+        .comment-content {
+            flex: 1;
+        }
+        
+        .comment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .comment-author {
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        
+        .dark-mode .comment-author {
+            color: var(--dark-mode-text);
+        }
+        
+        .comment-date {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .dark-mode .comment-date {
+            color: #aaa;
+        }
+        
+        .comment-text {
+            line-height: 1.6;
+        }
+        
+        .dark-mode .comment-text {
+            color: var(--dark-mode-text);
+        }
+        
         /* ستايلات عامة */
         .hidden {
             display: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #3367d6;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .dark-mode .btn-outline {
+            color: var(--dark-mode-text);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        .mt-5 { margin-top: 3rem; }
+        
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mb-5 { margin-bottom: 3rem; }
+        
+        @media (max-width: 1200px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 992px) {
@@ -812,6 +1655,7 @@
             
             .sidebar {
                 transform: translateX(-100%);
+                z-index: 1000;
             }
             
             .sidebar.active {
@@ -846,6 +1690,14 @@
             
             .form-group-full {
                 grid-column: span 1;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .articles-container {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -941,9 +1793,17 @@
                 <h3>DevConnect</h3>
             </div>
             <div class="sidebar-menu">
-                <a href="#" class="menu-item active" data-tab="explore">
+                <a href="#" class="menu-item" data-tab="home">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="explore">
                     <i class="fas fa-compass"></i>
                     <span>استكشف</span>
+                </a>
+                <a href="#" class="menu-item" data-tab="articles">
+                    <i class="fas fa-newspaper"></i>
+                    <span>المقالات</span>
                 </a>
                 <a href="#" class="menu-item" data-tab="web-requests">
                     <i class="fas fa-code"></i>
@@ -968,7 +1828,10 @@
         <div class="main-content">
             <!-- شريط العنوان -->
             <div class="header">
-                <h1 id="page-title">استكشف</h1>
+                <div>
+                    <i class="fas fa-bars menu-toggle"></i>
+                    <h1 id="page-title">الرئيسية</h1>
+                </div>
                 <div class="user-menu">
                     <div class="notification-icon">
                         <i class="fas fa-bell"></i>
@@ -978,8 +1841,65 @@
                 </div>
             </div>
             
+            <!-- تبويب الرئيسية -->
+            <div id="home-tab" class="tab-content">
+                <div class="home-page">
+                    <h1>مرحبًا بك في DevConnect</h1>
+                    <p>منصة المبرمجين العرب الأولى للتواصل، مشاركة المعرفة، والعمل على مشاريع مشتركة. انضم إلى مجتمعنا المتنامي من المطورين والمبرمجين وابدأ رحلتك في عالم البرمجة.</p>
+                    
+                    <div class="ad-container">
+                        <div class="ad-label">إعلان</div>
+                        <!-- مساحة إعلانية نموذجية -->
+                        <div style="width: 100%; height: 90px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <p>مساحة إعلانية (728x90)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>مجتمع نشط</h3>
+                            <p>انضم إلى آلاف المبرمجين العرب وشارك في النقاشات وتبادل الخبرات.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>مصادر تعليمية</h3>
+                            <p>تعلم من خلال مقالات ودروس متخصصة في مختلف لغات البرمجة.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3>مشاريع تعاونية</h3>
+                            <p>ابحث عن شركاء لتنفيذ أفكارك البرمجية أو انضم إلى مشاريع قائمة.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ad-container">
+                        <div class="ad-label">إعلان</div>
+                        <!-- مساحة إعلانية نموذجية -->
+                        <div style="width: 100%; height: 250px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                            <p>مساحة إعلانية (300x250)</p>
+                        </div>
+                    </div>
+                    
+                    <h2 class="mt-5">أحدث المقالات</h2>
+                    <div class="articles-container" id="home-articles">
+                        <!-- سيتم تحميل المقالات هنا عبر JavaScript -->
+                    </div>
+                    
+                    <a href="#" class="btn mt-4" data-tab="articles">عرض جميع المقالات</a>
+                </div>
+            </div>
+            
             <!-- تبويب الاستكشاف -->
-            <div id="explore-tab" class="tab-content">
+            <div id="explore-tab" class="tab-content hidden">
                 <div class="explore-container">
                     <div class="posts-container">
                         <div class="create-post">
@@ -1007,68 +1927,16 @@
                             </div>
                         </div>
                         
-                        <div class="post">
-                            <div class="post-header">
-                                <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                <div class="post-user">
-                                    <h4>أحمد محمد</h4>
-                                    <span>منذ 3 ساعات</span>
-                                </div>
-                                <div class="post-menu">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p>أنا أعمل على مشروع جديد باستخدام React و Firebase، وأواجه مشكلة في تكامل المصادقة. هل لدى أحدكم حل لهذه المشكلة؟</p>
-                            </div>
-                            <img src="https://via.placeholder.com/600x300" alt="Post Image" class="post-image">
-                            <div class="post-footer">
-                                <div class="post-like">
-                                    <i class="far fa-heart"></i>
-                                    <span>12 إعجاب</span>
-                                </div>
-                                <div class="post-comment">
-                                    <i class="far fa-comment"></i>
-                                    <span>5 تعليقات</span>
-                                </div>
-                                <div class="post-share">
-                                    <i class="fas fa-share"></i>
-                                    <span>مشاركة</span>
-                                </div>
+                        <div class="ad-container">
+                            <div class="ad-label">إعلان</div>
+                            <!-- مساحة إعلانية نموذجية -->
+                            <div style="width: 100%; height: 90px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                <p>مساحة إعلانية (728x90)</p>
                             </div>
                         </div>
                         
-                        <div class="post">
-                            <div class="post-header">
-                                <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                <div class="post-user">
-                                    <h4>سارة علي</h4>
-                                    <span>منذ 5 ساعات</span>
-                                </div>
-                                <div class="post-menu">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p>شاركت للتو مستودع جيت هاب جديد لمكتبة JavaScript صممتها لمعالجة التواريخ بطريقة سهلة. أتمنى أن تجدوا فيها الفائدة!</p>
-                                <pre><code>function formatDate(date, format) {
-    // كود المعالجة هنا
-}</code></pre>
-                            </div>
-                            <div class="post-footer">
-                                <div class="post-like active">
-                                    <i class="fas fa-heart"></i>
-                                    <span>24 إعجاب</span>
-                                </div>
-                                <div class="post-comment">
-                                    <i class="far fa-comment"></i>
-                                    <span>8 تعليقات</span>
-                                </div>
-                                <div class="post-share">
-                                    <i class="fas fa-share"></i>
-                                    <span>مشاركة</span>
-                                </div>
-                            </div>
+                        <div id="posts-list">
+                            <!-- سيتم تحميل المنشورات هنا عبر JavaScript -->
                         </div>
                     </div>
                     
@@ -1089,32 +1957,93 @@
                         
                         <div class="sidebar-widget">
                             <h3 class="widget-title">مبرمجون قد يعجبونك</h3>
-                            <div class="suggested-users">
-                                <div class="user-item">
-                                    <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                    <div class="user-info">
-                                        <h4>محمد خالد</h4>
-                                        <span>مطور ويب</span>
-                                    </div>
-                                    <button class="follow-btn">متابعة</button>
-                                </div>
-                                <div class="user-item">
-                                    <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                    <div class="user-info">
-                                        <h4>نورا أحمد</h4>
-                                        <span>مصممة واجهات</span>
-                                    </div>
-                                    <button class="follow-btn">متابعة</button>
-                                </div>
-                                <div class="user-item">
-                                    <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                    <div class="user-info">
-                                        <h4>يوسف سمير</h4>
-                                        <span>مطور تطبيقات</span>
-                                    </div>
-                                    <button class="follow-btn">متابعة</button>
-                                </div>
+                            <div class="suggested-users" id="suggested-users">
+                                <!-- سيتم تحميل المستخدمين المقترحين هنا عبر JavaScript -->
                             </div>
+                        </div>
+                        
+                        <div class="ad-container">
+                            <div class="ad-label">إعلان</div>
+                            <!-- مساحة إعلانية نموذجية -->
+                            <div style="width: 100%; height: 250px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                <p>مساحة إعلانية (300x250)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تبويب المقالات -->
+            <div id="articles-tab" class="tab-content hidden">
+                <div class="articles-container" id="all-articles">
+                    <!-- سيتم تحميل المقالات هنا عبر JavaScript -->
+                </div>
+                
+                <div class="ad-container">
+                    <div class="ad-label">إعلان</div>
+                    <!-- مساحة إعلانية نموذجية -->
+                    <div style="width: 100%; height: 90px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                        <p>مساحة إعلانية (728x90)</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <button class="btn" id="load-more-articles">تحميل المزيد</button>
+                </div>
+            </div>
+            
+            <!-- صفحة المقال المفرد -->
+            <div id="single-article-tab" class="tab-content hidden">
+                <div class="article-page" id="article-content">
+                    <!-- سيتم تحميل المقال هنا عبر JavaScript -->
+                </div>
+                
+                <div class="ad-container">
+                    <div class="ad-label">إعلان</div>
+                    <!-- مساحة إعلانية نموذجية -->
+                    <div style="width: 100%; height: 250px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                        <p>مساحة إعلانية (300x250)</p>
+                    </div>
+                </div>
+                
+                <div class="comments-section">
+                    <h3>التعليقات (3)</h3>
+                    
+                    <div class="comment-form">
+                        <textarea placeholder="أضف تعليقك..."></textarea>
+                        <button class="btn">نشر التعليق</button>
+                    </div>
+                    
+                    <div class="comment">
+                        <img src="https://via.placeholder.com/40" alt="User Avatar" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">أحمد محمد</span>
+                                <span class="comment-date">منذ يومين</span>
+                            </div>
+                            <p class="comment-text">مقال رائع! لقد استفدت كثيرًا من المعلومات المقدمة، خاصة الجزء الخاص بتحسين الأداء. شكرًا لك.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="comment">
+                        <img src="https://via.placeholder.com/40" alt="User Avatar" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">سارة علي</span>
+                                <span class="comment-date">منذ 3 أيام</span>
+                            </div>
+                            <p class="comment-text">هل يمكنك تقديم مثال عملي أكثر على استخدام هذه التقنية؟ أريد أن أطبقها في مشروعي الحالي.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="comment">
+                        <img src="https://via.placeholder.com/40" alt="User Avatar" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">محمد خالد</span>
+                                <span class="comment-date">منذ أسبوع</span>
+                            </div>
+                            <p class="comment-text">شكرًا على المقال المفيد. أنا أستخدم طريقة مشابهة ولكن مع بعض الاختلافات، ربما يمكننا مناقشة ذلك.</p>
                         </div>
                     </div>
                 </div>
@@ -1165,87 +2094,50 @@
                     </form>
                 </div>
                 
-                <div class="requests-list">
-                    <h2>طلباتي السابقة</h2>
-                    <div class="request-item">
-                        <div class="request-header">
-                            <h3 class="request-title">موقع متجر إلكتروني للملابس</h3>
-                            <span class="request-status status-completed">مكتمل</span>
-                        </div>
-                        <div class="request-meta">
-                            <span>تم الإنشاء: 15 مايو 2023</span>
-                            <span>الميزانية: $1500</span>
-                        </div>
-                        <div class="request-description">
-                            <p>أحتاج إلى موقع متجر إلكتروني لعرض وبيع الملابس الرجالية. يجب أن يحتوي على نظام دفع إلكتروني، صفحة لكل منتج، نظام تقييم، وإمكانية تتبع الطلبات.</p>
-                        </div>
-                        <div class="request-actions">
-                            <button class="action-btn view-btn">عرض التفاصيل</button>
-                            <button class="action-btn delete-btn">حذف</button>
-                        </div>
+                <div class="ad-container">
+                    <div class="ad-label">إعلان</div>
+                    <!-- مساحة إعلانية نموذجية -->
+                    <div style="width: 100%; height: 90px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                        <p>مساحة إعلانية (728x90)</p>
                     </div>
-                    
-                    <div class="request-item">
-                        <div class="request-header">
-                            <h3 class="request-title">موقع شخصي لعرض الأعمال</h3>
-                            <span class="request-status status-in-progress">قيد التنفيذ</span>
-                        </div>
-                        <div class="request-meta">
-                            <span>تم الإنشاء: 2 يونيو 2023</span>
-                            <span>الميزانية: $800</span>
-                        </div>
-                        <div class="request-description">
-                            <p>أبحث عن مصمم لإنشاء موقع شخصي لعرض أعمالي في التصميم الجرافيكي. يجب أن يحتوي على معرض لأعمالي، معلومات عني، وسيلة للتواصل، ومدونة بسيطة.</p>
-                        </div>
-                        <div class="request-actions">
-                            <button class="action-btn view-btn">عرض التفاصيل</button>
-                            <button class="action-btn delete-btn">حذف</button>
-                        </div>
-                    </div>
-                    
-                    <div class="request-item">
-                        <div class="request-header">
-                            <h3 class="request-title">تطبيق ويب لإدارة المهام</h3>
-                            <span class="request-status status-pending">قيد المراجعة</span>
-                        </div>
-                        <div class="request-meta">
-                            <span>تم الإنشاء: 10 يونيو 2023</span>
-                            <span>الميزانية: $2000</span>
-                        </div>
-                        <div class="request-description">
-                            <p>أحتاج إلى تطبيق ويب متكامل لإدارة المهام لفريق العمل الخاص بي. يجب أن يحتوي على ميزات مثل إنشاء المهام، تعيينها لأعضاء الفريق، متابعة التقدم، وإشعارات.</p>
-                        </div>
-                        <div class="request-actions">
-                            <button class="action-btn view-btn">عرض التفاصيل</button>
-                            <button class="action-btn delete-btn">حذف</button>
-                        </div>
-                    </div>
+                </div>
+                
+                <div class="requests-list" id="user-requests">
+                    <!-- سيتم تحميل الطلبات هنا عبر JavaScript -->
                 </div>
             </div>
             
             <!-- تبويب الملف الشخصي -->
             <div id="profile-tab" class="tab-content hidden">
                 <div class="profile-header">
-                    <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-avatar">
-                    <h1 class="profile-name">عمر الملاح</h1>
-                    <p class="profile-title">مطور ويب ومصمم واجهات</p>
-                    <p class="profile-bio">أنا مطور ويب بخبرة 5 سنوات في تطوير تطبيقات الويب باستخدام التقنيات الحديثة مثل React, Node.js, و Firebase. أحب مشاركة معرفتي مع الآخرين والعمل على مشاريع مميزة.</p>
+                    <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-avatar" id="profile-avatar">
+                    <h1 class="profile-name" id="profile-name">عمر الملاح</h1>
+                    <p class="profile-title" id="profile-title">مطور ويب ومصمم واجهات</p>
+                    <p class="profile-bio" id="profile-bio">أنا مطور ويب بخبرة 5 سنوات في تطوير تطبيقات الويب باستخدام التقنيات الحديثة مثل React, Node.js, و Firebase. أحب مشاركة معرفتي مع الآخرين والعمل على مشاريع مميزة.</p>
                     <div class="profile-stats">
                         <div class="stat-item">
-                            <div class="stat-number">142</div>
+                            <div class="stat-number" id="followers-count">142</div>
                             <div class="stat-label">متابعون</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">87</div>
+                            <div class="stat-number" id="following-count">87</div>
                             <div class="stat-label">متابَعون</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">24</div>
+                            <div class="stat-number" id="projects-count">24</div>
                             <div class="stat-label">مشاريع</div>
                         </div>
                     </div>
                     <div class="profile-actions">
-                        <button class="edit-profile-btn">تعديل الملف الشخصي</button>
+                        <button class="edit-profile-btn" id="edit-profile-btn">تعديل الملف الشخصي</button>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <div class="ad-label">إعلان</div>
+                    <!-- مساحة إعلانية نموذجية -->
+                    <div style="width: 100%; height: 90px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                        <p>مساحة إعلانية (728x90)</p>
                     </div>
                 </div>
                 
@@ -1257,90 +2149,32 @@
                 
                 <div class="profile-content">
                     <div id="profile-posts" class="profile-tab-content">
-                        <div class="post">
-                            <div class="post-header">
-                                <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                <div class="post-user">
-                                    <h4>عمر الملاح</h4>
-                                    <span>منذ يومين</span>
-                                </div>
-                                <div class="post-menu">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p>شاركت للتو مشروعي الجديد على GitHub! إنها مكتبة لتحسين أداء تطبيقات React. يمكنكم تجربتها وإبداء آرائكم.</p>
-                                <pre><code>import { useOptimize } from 'react-optimizer';</code></pre>
-                            </div>
-                            <div class="post-footer">
-                                <div class="post-like">
-                                    <i class="far fa-heart"></i>
-                                    <span>32 إعجاب</span>
-                                </div>
-                                <div class="post-comment">
-                                    <i class="far fa-comment"></i>
-                                    <span>14 تعليق</span>
-                                </div>
-                                <div class="post-share">
-                                    <i class="fas fa-share"></i>
-                                    <span>مشاركة</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="post">
-                            <div class="post-header">
-                                <img src="https://via.placeholder.com/40" alt="User Avatar">
-                                <div class="post-user">
-                                    <h4>عمر الملاح</h4>
-                                    <span>منذ أسبوع</span>
-                                </div>
-                                <div class="post-menu">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p>أبحث عن مطورين لمساعدتي في مشروع مفتوح المصدر لتطوير منصة تعليمية للمبرمجين المبتدئين. إذا كنتم مهتمين، راسلوني!</p>
-                            </div>
-                            <img src="https://via.placeholder.com/600x300" alt="Post Image" class="post-image">
-                            <div class="post-footer">
-                                <div class="post-like active">
-                                    <i class="fas fa-heart"></i>
-                                    <span>45 إعجاب</span>
-                                </div>
-                                <div class="post-comment">
-                                    <i class="far fa-comment"></i>
-                                    <span>22 تعليق</span>
-                                </div>
-                                <div class="post-share">
-                                    <i class="fas fa-share"></i>
-                                    <span>مشاركة</span>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- سيتم تحميل مشاركات المستخدم هنا عبر JavaScript -->
                     </div>
                     
                     <div id="profile-projects" class="profile-tab-content hidden">
-                        <p>قائمة المشاريع ستظهر هنا</p>
+                        <div class="articles-container" id="user-projects">
+                            <!-- سيتم تحميل مشاريع المستخدم هنا عبر JavaScript -->
+                        </div>
                     </div>
                     
                     <div id="profile-about" class="profile-tab-content hidden">
                         <div class="about-section">
                             <h3>معلومات أساسية</h3>
-                            <div class="about-item">
+                            <div class="about-item" id="profile-country">
                                 <strong>البلد:</strong> مصر
                             </div>
-                            <div class="about-item">
+                            <div class="about-item" id="profile-city">
                                 <strong>المدينة:</strong> القاهرة
                             </div>
-                            <div class="about-item">
+                            <div class="about-item" id="profile-job">
                                 <strong>الوظيفة:</strong> مطور ويب مستقل
                             </div>
                         </div>
                         
                         <div class="about-section">
                             <h3>المهارات</h3>
-                            <div class="skills-list">
+                            <div class="skills-list" id="profile-skills">
                                 <span class="skill-tag">JavaScript</span>
                                 <span class="skill-tag">React</span>
                                 <span class="skill-tag">Node.js</span>
@@ -1352,7 +2186,7 @@
                         
                         <div class="about-section">
                             <h3>التعليم</h3>
-                            <div class="education-item">
+                            <div class="education-item" id="profile-education">
                                 <strong>بكالوريوس علوم الحاسب</strong>
                                 <p>جامعة القاهرة, 2015 - 2019</p>
                             </div>
@@ -1369,13 +2203,13 @@
                         <h3>الحساب</h3>
                         <div class="setting-item">
                             <label>البريد الإلكتروني</label>
-                            <p>omar.elmallah2011@gmail.com</p>
-                            <button class="edit-btn">تغيير</button>
+                            <p id="user-email">omar.elmallah2011@gmail.com</p>
+                            <button class="edit-btn" id="change-email-btn">تغيير</button>
                         </div>
                         <div class="setting-item">
                             <label>كلمة المرور</label>
                             <p>********</p>
-                            <button class="edit-btn">تغيير</button>
+                            <button class="edit-btn" id="change-password-btn">تغيير</button>
                         </div>
                     </div>
                     
@@ -1383,7 +2217,7 @@
                         <h3>التفضيلات</h3>
                         <div class="setting-item">
                             <label>اللغة</label>
-                            <select class="settings-select">
+                            <select class="settings-select" id="language-select">
                                 <option value="ar" selected>العربية</option>
                                 <option value="en">English</option>
                             </select>
@@ -1391,7 +2225,7 @@
                         <div class="setting-item">
                             <label>وضع الظلام</label>
                             <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" id="dark-mode-toggle">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -1402,20 +2236,35 @@
                         <div class="setting-item">
                             <label>إشعارات البريد الإلكتروني</label>
                             <label class="switch">
-                                <input type="checkbox" checked>
+                                <input type="checkbox" id="email-notifications" checked>
                                 <span class="slider round"></span>
                             </label>
                         </div>
                         <div class="setting-item">
                             <label>إشعارات التطبيق</label>
                             <label class="switch">
-                                <input type="checkbox" checked>
+                                <input type="checkbox" id="app-notifications" checked>
                                 <span class="slider round"></span>
                             </label>
                         </div>
                     </div>
                     
-                    <button class="save-settings-btn">حفظ التغييرات</button>
+                    <button class="save-settings-btn" id="save-settings-btn">حفظ التغييرات</button>
+                </div>
+                
+                <div class="ad-container mt-4">
+                    <div class="ad-label">إعلان</div>
+                    <!-- مساحة إعلانية نموذجية -->
+                    <div style="width: 100%; height: 250px; background-color: #eee; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                        <p>مساحة إعلانية (300x250)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصفحات القانونية -->
+            <div id="legal-tab" class="tab-content hidden">
+                <div class="legal-page" id="legal-content">
+                    <!-- سيتم تحميل المحتوى القانوني هنا عبر JavaScript -->
                 </div>
             </div>
         </div>
@@ -1427,7 +2276,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
     <script>
-        // Your web app's Firebase configuration
+        // تكوين Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyBfXJ-2tmCYo-pQjfN_4nAdxC-NcqfjAlo",
             authDomain: "tamec-8f9ea.firebaseapp.com",
@@ -1438,7 +2287,7 @@
             measurementId: "G-W7TT6VTKSP"
         };
 
-        // Initialize Firebase
+        // تهيئة Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
@@ -1466,169 +2315,811 @@
         const pageTitle = document.getElementById('page-title');
         const profileTabs = document.querySelectorAll('.profile-tab');
         const profileTabContents = document.querySelectorAll('.profile-tab-content');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const saveSettingsBtn = document.getElementById('save-settings-btn');
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        const loadMoreArticlesBtn = document.getElementById('load-more-articles');
 
-        // معالجة تسجيل الدخول
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
+        // بيانات المقالات
+        const articles = [
+            {
+                id: '1',
+                title: 'أفضل ممارسات React في 2023',
+                excerpt: 'تعرف على أحدث الممارسات والتقنيات لتحسين أداء تطبيقات React الخاصة بك.',
+                category: 'React',
+                image: 'https://via.placeholder.com/400x225',
+                author: 'أحمد محمد',
+                date: '15 يونيو 2023',
+                views: 1245
+            },
+            {
+                id: '2',
+                title: 'كيفية استخدام Firebase في تطبيقاتك',
+                excerpt: 'دليل شامل لدمج Firebase في تطبيقات الويب والجوال لتحقيق أفضل النتائج.',
+                category: 'Firebase',
+                image: 'https://via.placeholder.com/400x225',
+                author: 'سارة علي',
+                date: '10 يونيو 2023',
+                views: 987
+            },
+            {
+                id: '3',
+                title: 'تحسين أداء JavaScript',
+                excerpt: 'نصائح وتقنيات لتحسين أداء كود JavaScript وجعل تطبيقاتك أسرع.',
+                category: 'JavaScript',
+                image: 'https://via.placeholder.com/400x225',
+                author: 'محمد خالد',
+                date: '5 يونيو 2023',
+                views: 1562
+            },
+            {
+                id: '4',
+                title: 'أساسيات Python للمبتدئين',
+                excerpt: 'تعلم أساسيات لغة Python من الصفر حتى الاحتراف في هذا الدليل الشامل.',
+                category: 'Python',
+                image: 'https://via.placeholder.com/400x225',
+                author: 'نورا أحمد',
+                date: '1 يونيو 2023',
+                views: 2034
+            },
+            {
+                id: '5',
+                title: 'تصميم واجهات مستخدم جذابة',
+                excerpt: 'كيفية تصميم واجهات مستخدم جذابة وسهلة الاستخدام لتطبيقاتك.',
+                category: 'UI/UX',
+                image: 'https://via.placeholder.com/400x225',
+                author: 'يوسف سمير',
+                date: '28 مايو 2023',
+                views: 876
+            },
+            {
+                id: '6',
+                title: 'أدوات أساسية لكل مطور ويب',
+                excerpt: 'قائمة بأهم الأدوات التي يحتاجها كل مطور ويب في عمله اليومي.',
+                category: 'Web Development',
+                image: 'https://via.placeholder.com/400x225',
+                author: 'عمر الملاح',
+                date: '25 مايو 2023',
+                views: 1432
+            }
+        ];
+
+        // بيانات المنشورات
+        const posts = [
+            {
+                id: '1',
+                author: 'أحمد محمد',
+                authorPhoto: 'https://via.placeholder.com/40',
+                content: 'أنا أعمل على مشروع جديد باستخدام React و Firebase، وأواجه مشكلة في تكامل المصادقة. هل لدى أحدكم حل لهذه المشكلة؟',
+                image: 'https://via.placeholder.com/600x300',
+                likes: 12,
+                comments: 5,
+                date: 'منذ 3 ساعات'
+            },
+            {
+                id: '2',
+                author: 'سارة علي',
+                authorPhoto: 'https://via.placeholder.com/40',
+                content: 'شاركت للتو مستودع جيت هاب جديد لمكتبة JavaScript صممتها لمعالجة التواريخ بطريقة سهلة. أتمنى أن تجدوا فيها الفائدة!',
+                code: 'function formatDate(date, format) {\n    // كود المعالجة هنا\n}',
+                likes: 24,
+                comments: 8,
+                date: 'منذ 5 ساعات'
+            },
+            {
+                id: '3',
+                author: 'محمد خالد',
+                authorPhoto: 'https://via.placeholder.com/40',
+                content: 'هل لدى أحدكم خبرة في تحسين أداء قواعد بيانات NoSQL؟ أبحث عن نصائح لتحسين استعلاماتي في Firebase Firestore.',
+                likes: 8,
+                comments: 3,
+                date: 'منذ يوم'
+            }
+        ];
+
+        // بيانات المستخدمين المقترحين
+        const suggestedUsers = [
+            {
+                name: 'محمد خالد',
+                title: 'مطور ويب',
+                avatar: 'https://via.placeholder.com/40'
+            },
+            {
+                name: 'نورا أحمد',
+                title: 'مصممة واجهات',
+                avatar: 'https://via.placeholder.com/40'
+            },
+            {
+                name: 'يوسف سمير',
+                title: 'مطور تطبيقات',
+                avatar: 'https://via.placeholder.com/40'
+            }
+        ];
+
+        // بيانات المشاريع
+        const projects = [
+            {
+                id: '1',
+                title: 'منصة تعليمية للبرمجة',
+                description: 'منصة لتعليم البرمجة للمبتدئين بمحتوى عربي عالي الجودة.',
+                image: 'https://via.placeholder.com/400x225',
+                tags: ['React', 'Node.js', 'MongoDB']
+            },
+            {
+                id: '2',
+                title: 'تطبيق إدارة المهام',
+                description: 'تطبيق ويب لإدارة المهام الشخصية والفريقية بميزات متقدمة.',
+                image: 'https://via.placeholder.com/400x225',
+                tags: ['Vue.js', 'Firebase']
+            },
+            {
+                id: '3',
+                title: 'مكتبة معالجة الصور',
+                description: 'مكتبة JavaScript لمعالجة الصور في المتصفح دون الحاجة لخادم.',
+                image: 'https://via.placeholder.com/400x225',
+                tags: ['JavaScript', 'Canvas API']
+            }
+        ];
+
+        // الصفحات القانونية
+        const legalPages = {
+            'privacy': {
+                title: 'سياسة الخصوصية',
+                content: `
+                    <h1>سياسة الخصوصية</h1>
+                    <p>نحن في DevConnect نعتبر خصوصيتك أمرًا بالغ الأهمية. هذه السياسة توضح كيف نتعامل مع معلوماتك الشخصية.</p>
+                    
+                    <h2>المعلومات التي نجمعها</h2>
+                    <p>قد نجمع المعلومات التالية:</p>
+                    <ul>
+                        <li>معلومات التسجيل (الاسم، البريد الإلكتروني، كلمة المرور)</li>
+                        <li>معلومات الملف الشخصي (الصورة، السيرة الذاتية، المهارات)</li>
+                        <li>المحتوى الذي تنشره على المنصة</li>
+                        <li>بيانات الاستخدام والتفاعل مع المنصة</li>
+                    </ul>
+                    
+                    <h2>كيف نستخدم المعلومات</h2>
+                    <p>نستخدم المعلومات التي نجمعها لـ:</p>
+                    <ul>
+                        <li>توفير الخدمات وتحسين تجربة المستخدم</li>
+                        <li>التواصل مع المستخدمين</li>
+                        <li>تحليل استخدام المنصة وتحسينها</li>
+                        <li>منع الاحتيال وإساءة الاستخدام</li>
+                    </ul>
+                    
+                    <h2>حماية المعلومات</h2>
+                    <p>نحن نستخدم إجراءات أمنية مناسبة لحماية معلوماتك الشخصية من الوصول غير المصرح به أو التغيير أو الإفشاء.</p>
+                    
+                    <h2>التغييرات على السياسة</h2>
+                    <p>قد نقوم بتحديث هذه السياسة من وقت لآخر. ننصحك بمراجعتها بشكل دوري.</p>
+                `
+            },
+            'terms': {
+                title: 'الشروط والأحكام',
+                content: `
+                    <h1>الشروط والأحكام</h1>
+                    <p>باستخدامك لمنصة DevConnect، فإنك توافق على الالتزام بهذه الشروط والأحكام.</p>
+                    
+                    <h2>استخدام المنصة</h2>
+                    <p>يجب عليك:</p>
+                    <ul>
+                        <li>استخدام المنصة لأغراض قانونية فقط</li>
+                        <li>عدم انتهاك حقوق الآخرين</li>
+                        <li>عدم نشر محتوى غير لائق أو مسيء</li>
+                        <li>عدم محاولة اختراق المنصة أو تعطيلها</li>
+                    </ul>
+                    
+                    <h2>المحتوى</h2>
+                    <p>أنت مسؤول عن أي محتوى تنشره على المنصة. يجب أن تمتلك حقوق النشر أو الإذن بنشر أي محتوى تشاركه.</p>
+                    
+                    <h2>إيقاف الحساب</h2>
+                    <p>نحتفظ بالحق في إيقاف أو تعليق أي حساب ينتهك هذه الشروط والأحكام دون إشعار مسبق.</p>
+                    
+                    <h2>التغييرات على الشروط</h2>
+                    <p>قد نقوم بتعديل هذه الشروط من وقت لآخر. سيتم إعلامك بأي تغييرات جوهرية.</p>
+                `
+            },
+            'about': {
+                title: 'من نحن',
+                content: `
+                    <h1>من نحن</h1>
+                    <p>DevConnect هي منصة عربية للمبرمجين والمطورين، تأسست في عام 2023 بهدف بناء مجتمع تقني عربي قوي.</p>
+                    
+                    <h2>رؤيتنا</h2>
+                    <p>أن نكون المنصة الرائدة في العالم العربي للتواصل بين المبرمجين ومشاركة المعرفة.</p>
+                    
+                    <h2>رسالتنا</h2>
+                    <p>تمكين المبرمجين العرب من خلال توفير بيئة تعاونية لتبادل الخبرات والعمل على مشاريع مشتركة.</p>
+                    
+                    <h2>فريقنا</h2>
+                    <p>نحن فريق من المطورين والمصممين والمهتمين بالتقنية، نعمل معًا لبناء أفضل تجربة للمستخدمين.</p>
+                `
+            },
+            'contact': {
+                title: 'اتصل بنا',
+                content: `
+                    <h1>اتصل بنا</h1>
+                    <p>نرحب بأسئلتك واستفساراتك واقتراحاتك. يمكنك التواصل معنا عبر:</p>
+                    
+                    <h2>البريد الإلكتروني</h2>
+                    <p>info@devconnect.com</p>
+                    
+                    <h2>وسائل التواصل الاجتماعي</h2>
+                    <p>تابعنا على:</p>
+                    <ul>
+                        <li>Twitter: @DevConnect</li>
+                        <li>Facebook: DevConnect</li>
+                        <li>LinkedIn: DevConnect</li>
+                    </ul>
+                    
+                    <h2>المقر الرئيسي</h2>
+                    <p>القاهرة، مصر</p>
+                `
+            }
+        };
+
+        // تهيئة التطبيق
+        function initApp() {
+            // تحميل المقالات على الصفحة الرئيسية
+            loadHomeArticles();
             
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // تسجيل الدخول ناجح
-                    showDashboard(userCredential.user);
-                })
-                .catch((error) => {
-                    alert(error.message);
+            // تحميل المنشورات
+            loadPosts();
+            
+            // تحميل المستخدمين المقترحين
+            loadSuggestedUsers();
+            
+            // تحميل الإعدادات المحفوظة
+            loadSettings();
+            
+            // إضافة معالجات الأحداث
+            setupEventListeners();
+            
+            // التحقق من حالة المصادقة
+            checkAuthState();
+        }
+
+        // تحميل المقالات على الصفحة الرئيسية
+        function loadHomeArticles() {
+            const homeArticlesContainer = document.getElementById('home-articles');
+            homeArticlesContainer.innerHTML = '';
+            
+            // عرض 3 مقالات فقط على الصفحة الرئيسية
+            const recentArticles = articles.slice(0, 3);
+            
+            recentArticles.forEach(article => {
+                const articleElement = document.createElement('div');
+                articleElement.className = 'article-card';
+                articleElement.innerHTML = `
+                    <img src="${article.image}" alt="${article.title}" class="article-image">
+                    <div class="article-content">
+                        <span class="article-category">${article.category}</span>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-excerpt">${article.excerpt}</p>
+                        <div class="article-meta">
+                            <span>${article.date}</span>
+                            <span class="article-author">${article.author}</span>
+                        </div>
+                    </div>
+                `;
+                
+                articleElement.addEventListener('click', () => {
+                    showArticle(article.id);
                 });
-        });
-
-        // معالجة إنشاء حساب
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('signup-name').value;
-            const email = document.getElementById('signup-email').value;
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('signup-confirm-password').value;
+                
+                homeArticlesContainer.appendChild(articleElement);
+            });
             
-            if (password !== confirmPassword) {
-                alert('كلمة المرور غير متطابقة');
-                return;
+            // تحميل جميع المقالات في تبويب المقالات
+            const allArticlesContainer = document.getElementById('all-articles');
+            allArticlesContainer.innerHTML = '';
+            
+            articles.forEach(article => {
+                const articleElement = document.createElement('div');
+                articleElement.className = 'article-card';
+                articleElement.innerHTML = `
+                    <img src="${article.image}" alt="${article.title}" class="article-image">
+                    <div class="article-content">
+                        <span class="article-category">${article.category}</span>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-excerpt">${article.excerpt}</p>
+                        <div class="article-meta">
+                            <span>${article.date}</span>
+                            <span class="article-author">${article.author}</span>
+                        </div>
+                    </div>
+                `;
+                
+                articleElement.addEventListener('click', () => {
+                    showArticle(article.id);
+                });
+                
+                allArticlesContainer.appendChild(articleElement);
+            });
+        }
+
+        // عرض مقال مفرد
+        function showArticle(articleId) {
+            const article = articles.find(a => a.id === articleId);
+            if (!article) return;
+            
+            const articleContent = document.getElementById('article-content');
+            articleContent.innerHTML = `
+                <div class="article-header">
+                    <h1>${article.title}</h1>
+                    <div class="article-meta">
+                        <span>${article.date}</span>
+                        <span>${article.author}</span>
+                        <span>${article.views} مشاهدة</span>
+                    </div>
+                </div>
+                <img src="${article.image}" alt="${article.title}" class="article-image">
+                <div class="article-content">
+                    <p>هذا مثال لمحتوى المقال. في التطبيق الفعلي، سيتم جلب المحتوى الكامل للمقال من قاعدة البيانات.</p>
+                    <p>${article.excerpt}</p>
+                    <h2>أفضل الممارسات</h2>
+                    <p>هنا سيتم عرض محتوى المقال الكامل مع جميع الأقسام والتفاصيل.</p>
+                    <pre><code>function example() {
+    // كود مثال
+    return "Hello World";
+}</code></pre>
+                    <h2>الخاتمة</h2>
+                    <p>في النهاية، هذه مجرد أمثلة توضيحية لكيفية عرض المقالات في المنصة.</p>
+                </div>
+            `;
+            
+            // إظهار تبويب المقال المفرد وإخفاء الآخرين
+            tabContents.forEach(content => content.classList.add('hidden'));
+            document.getElementById('single-article-tab').classList.remove('hidden');
+            
+            // تحديث عنوان الصفحة
+            pageTitle.textContent = article.title;
+            
+            // إضافة سجل للصفحة الحالية في التاريخ
+            window.history.pushState({ tab: 'single-article', articleId }, '', `#article-${articleId}`);
+        }
+
+        // تحميل المنشورات
+        function loadPosts() {
+            const postsList = document.getElementById('posts-list');
+            postsList.innerHTML = '';
+            
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <img src="${post.authorPhoto}" alt="User Avatar">
+                        <div class="post-user">
+                            <h4>${post.author}</h4>
+                            <span>${post.date}</span>
+                        </div>
+                        <div class="post-menu">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>${post.content}</p>
+                        ${post.image ? `<img src="${post.image}" alt="Post Image" class="post-image">` : ''}
+                        ${post.code ? `<pre><code>${post.code}</code></pre>` : ''}
+                    </div>
+                    <div class="post-footer">
+                        <div class="post-like" data-id="${post.id}">
+                            <i class="far fa-heart"></i>
+                            <span>${post.likes} إعجاب</span>
+                        </div>
+                        <div class="post-comment">
+                            <i class="far fa-comment"></i>
+                            <span>${post.comments} تعليقات</span>
+                        </div>
+                        <div class="post-share">
+                            <i class="fas fa-share"></i>
+                            <span>مشاركة</span>
+                        </div>
+                    </div>
+                `;
+                
+                // إضافة معالج حدث للإعجاب بالمنشور
+                const likeBtn = postElement.querySelector('.post-like');
+                likeBtn.addEventListener('click', () => {
+                    likePost(post.id);
+                });
+                
+                postsList.appendChild(postElement);
+            });
+        }
+
+        // تحميل المستخدمين المقترحين
+        function loadSuggestedUsers() {
+            const suggestedUsersContainer = document.getElementById('suggested-users');
+            suggestedUsersContainer.innerHTML = '';
+            
+            suggestedUsers.forEach(user => {
+                const userElement = document.createElement('div');
+                userElement.className = 'user-item';
+                userElement.innerHTML = `
+                    <img src="${user.avatar}" alt="User Avatar">
+                    <div class="user-info">
+                        <h4>${user.name}</h4>
+                        <span>${user.title}</span>
+                    </div>
+                    <button class="follow-btn">متابعة</button>
+                `;
+                
+                suggestedUsersContainer.appendChild(userElement);
+            });
+        }
+
+        // تحميل المشاريع في الملف الشخصي
+        function loadUserProjects() {
+            const projectsContainer = document.getElementById('user-projects');
+            projectsContainer.innerHTML = '';
+            
+            projects.forEach(project => {
+                const projectElement = document.createElement('div');
+                projectElement.className = 'article-card';
+                projectElement.innerHTML = `
+                    <img src="${project.image}" alt="${project.title}" class="article-image">
+                    <div class="article-content">
+                        <h3 class="article-title">${project.title}</h3>
+                        <p class="article-excerpt">${project.description}</p>
+                        <div class="trending-tags">
+                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                projectsContainer.appendChild(projectElement);
+            });
+        }
+
+        // تحميل الإعدادات المحفوظة
+        function loadSettings() {
+            const savedSettings = JSON.parse(localStorage.getItem('userSettings')) || {};
+            
+            // وضع الظلام
+            if (savedSettings.darkMode) {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.checked = true;
             }
             
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // حفظ بيانات المستخدم الإضافية
-                    return db.collection('users').doc(userCredential.user.uid).set({
-                        name: name,
-                        email: email,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                })
-                .then(() => {
-                    // تسجيل الدخول بعد إنشاء الحساب
-                    showDashboard(auth.currentUser);
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
-        });
-
-        // معالجة إعادة تعيين كلمة المرور
-        resetPasswordForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('reset-email').value;
+            // اللغة
+            if (savedSettings.language) {
+                document.getElementById('language-select').value = savedSettings.language;
+            }
             
-            auth.sendPasswordResetEmail(email)
-                .then(() => {
-                    alert('تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني');
-                    showLoginForm();
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
-        });
+            // الإشعارات
+            if (savedSettings.emailNotifications !== undefined) {
+                document.getElementById('email-notifications').checked = savedSettings.emailNotifications;
+            }
+            
+            if (savedSettings.appNotifications !== undefined) {
+                document.getElementById('app-notifications').checked = savedSettings.appNotifications;
+            }
+        }
 
-        // تسجيل الدخول بجوجل
-        googleLoginBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then((userCredential) => {
-                    showDashboard(userCredential.user);
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
-        });
+        // إضافة معالجات الأحداث
+        function setupEventListeners() {
+            // تسجيل الدخول
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        showDashboard(userCredential.user);
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            });
 
-        // تسجيل الدخول بجيت هاب
-        githubLoginBtn.addEventListener('click', () => {
-            const provider = new firebase.auth.GithubAuthProvider();
-            auth.signInWithPopup(provider)
-                .then((userCredential) => {
-                    showDashboard(userCredential.user);
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
-        });
+            // إنشاء حساب
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('signup-confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    alert('كلمة المرور غير متطابقة');
+                    return;
+                }
+                
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        // حفظ بيانات المستخدم الإضافية
+                        return db.collection('users').doc(userCredential.user.uid).set({
+                            name: name,
+                            email: email,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                    })
+                    .then(() => {
+                        showDashboard(auth.currentUser);
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            });
 
-        // تسجيل الخروج
-        logoutBtn.addEventListener('click', () => {
-            auth.signOut()
-                .then(() => {
-                    authPage.classList.remove('hidden');
-                    dashboard.classList.add('hidden');
-                    showLoginForm();
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
-        });
+            // إعادة تعيين كلمة المرور
+            resetPasswordForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('reset-email').value;
+                
+                auth.sendPasswordResetEmail(email)
+                    .then(() => {
+                        alert('تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني');
+                        showLoginForm();
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            });
 
-        // تبديل بين نماذج المصادقة
-        showRegisterLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showRegisterForm();
-        });
+            // تسجيل الدخول بجوجل
+            googleLoginBtn.addEventListener('click', () => {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                auth.signInWithPopup(provider)
+                    .then((userCredential) => {
+                        showDashboard(userCredential.user);
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            });
 
-        showLoginLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showLoginForm();
-        });
+            // تسجيل الدخول بجيت هاب
+            githubLoginBtn.addEventListener('click', () => {
+                const provider = new firebase.auth.GithubAuthProvider();
+                auth.signInWithPopup(provider)
+                    .then((userCredential) => {
+                        showDashboard(userCredential.user);
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            });
 
-        forgotPasswordLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showForgotPasswordForm();
-        });
+            // تسجيل الخروج
+            logoutBtn.addEventListener('click', () => {
+                auth.signOut()
+                    .then(() => {
+                        authPage.classList.remove('hidden');
+                        dashboard.classList.add('hidden');
+                        showLoginForm();
+                    })
+                    .catch((error) => {
+                        alert(error.message);
+                    });
+            });
 
-        backToLoginLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showLoginForm();
-        });
+            // تبديل بين نماذج المصادقة
+            showRegisterLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showRegisterForm();
+            });
 
-        // تبديل بين تبويبات لوحة التحكم
-        menuItems.forEach(item => {
-            if (item.dataset.tab) {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
+            showLoginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showLoginForm();
+            });
+
+            forgotPasswordLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showForgotPasswordForm();
+            });
+
+            backToLoginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showLoginForm();
+            });
+
+            // تبديل بين تبويبات لوحة التحكم
+            menuItems.forEach(item => {
+                if (item.dataset.tab) {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        
+                        // إزالة التنشيط من جميع العناصر
+                        menuItems.forEach(i => i.classList.remove('active'));
+                        
+                        // تنشيط العنصر الحالي
+                        item.classList.add('active');
+                        
+                        // إخفاء جميع المحتويات
+                        tabContents.forEach(content => content.classList.add('hidden'));
+                        
+                        // إظهار المحتوى المطلوب
+                        const tabId = `${item.dataset.tab}-tab`;
+                        document.getElementById(tabId).classList.remove('hidden');
+                        
+                        // تحديث عنوان الصفحة
+                        pageTitle.textContent = item.querySelector('span').textContent;
+                        
+                        // إضافة سجل للصفحة الحالية في التاريخ
+                        window.history.pushState({ tab: item.dataset.tab }, '', `#${item.dataset.tab}`);
+                        
+                        // إذا كانت صفحة الملف الشخصي، تحميل المشاريع
+                        if (item.dataset.tab === 'profile') {
+                            loadUserProjects();
+                        }
+                    });
+                }
+            });
+
+            // تبديل بين تبويبات الملف الشخصي
+            profileTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
                     // إزالة التنشيط من جميع العناصر
-                    menuItems.forEach(i => i.classList.remove('active'));
+                    profileTabs.forEach(t => t.classList.remove('active'));
                     
                     // تنشيط العنصر الحالي
-                    item.classList.add('active');
+                    tab.classList.add('active');
                     
+                    // إخفاء جميع المحتويات
+                    profileTabContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // إظهار المحتوى المطلوب
+                    const tabId = `profile-${tab.dataset.profileTab}`;
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+
+            // تبديل القائمة الجانبية على الهاتف
+            menuToggle.addEventListener('click', () => {
+                document.querySelector('.sidebar').classList.toggle('active');
+            });
+
+            // تبديل وضع الظلام
+            darkModeToggle.addEventListener('change', () => {
+                document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+            });
+
+            // حفظ الإعدادات
+            saveSettingsBtn.addEventListener('click', () => {
+                const settings = {
+                    darkMode: darkModeToggle.checked,
+                    language: document.getElementById('language-select').value,
+                    emailNotifications: document.getElementById('email-notifications').checked,
+                    appNotifications: document.getElementById('app-notifications').checked
+                };
+                
+                localStorage.setItem('userSettings', JSON.stringify(settings));
+                alert('تم حفظ الإعدادات بنجاح');
+            });
+
+            // تحميل المزيد من المقالات
+            if (loadMoreArticlesBtn) {
+                loadMoreArticlesBtn.addEventListener('click', () => {
+                    // في التطبيق الفعلي، هنا سيتم جلب المزيد من المقالات من قاعدة البيانات
+                    alert('سيتم تحميل المزيد من المقالات في التطبيق الفعلي');
+                });
+            }
+
+            // معالجة طلبات الويب
+            const requestForm = document.getElementById('request-form');
+            if (requestForm) {
+                requestForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const user = auth.currentUser;
+                    if (!user) return;
+                    
+                    const projectName = document.getElementById('project-name').value;
+                    const projectType = document.getElementById('project-type').value;
+                    const projectDescription = document.getElementById('project-description').value;
+                    const projectBudget = document.getElementById('project-budget').value;
+                    const projectDeadline = document.getElementById('project-deadline').value;
+                    const projectNotes = document.getElementById('project-notes').value;
+                    
+                    db.collection('webRequests').add({
+                        userId: user.uid,
+                        projectName: projectName,
+                        projectType: projectType,
+                        projectDescription: projectDescription,
+                        projectBudget: projectBudget,
+                        projectDeadline: projectDeadline,
+                        projectNotes: projectNotes,
+                        status: 'pending',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    })
+                    .then(() => {
+                        alert('تم إرسال طلبك بنجاح!');
+                        requestForm.reset();
+                        loadUserRequests();
+                    })
+                    .catch((error) => {
+                        alert('حدث خطأ أثناء إرسال الطلب: ' + error.message);
+                    });
+                });
+            }
+
+            // معالجة زر تعديل الملف الشخصي
+            if (editProfileBtn) {
+                editProfileBtn.addEventListener('click', () => {
+                    alert('سيتم فتح نموذج تعديل الملف الشخصي في التطبيق الفعلي');
+                });
+            }
+
+            // معالجة تغيير البريد الإلكتروني
+            const changeEmailBtn = document.getElementById('change-email-btn');
+            if (changeEmailBtn) {
+                changeEmailBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('سيتم فتح نموذج تغيير البريد الإلكتروني في التطبيق الفعلي');
+                });
+            }
+
+            // معالجة تغيير كلمة المرور
+            const changePasswordBtn = document.getElementById('change-password-btn');
+            if (changePasswordBtn) {
+                changePasswordBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('سيتم فتح نموذج تغيير كلمة المرور في التطبيق الفعلي');
+                });
+            }
+
+            // معالجة زر الإعجاب بالمنشور
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.post-like')) {
+                    const postId = e.target.closest('.post-like').dataset.id;
+                    likePost(postId);
+                }
+            });
+
+            // معالجة تغيير الصفحات عبر زر الرجوع في المتصفح
+            window.addEventListener('popstate', (e) => {
+                if (e.state && e.state.tab) {
                     // إخفاء جميع المحتويات
                     tabContents.forEach(content => content.classList.add('hidden'));
                     
                     // إظهار المحتوى المطلوب
-                    const tabId = `${item.dataset.tab}-tab`;
+                    const tabId = `${e.state.tab}-tab`;
                     document.getElementById(tabId).classList.remove('hidden');
                     
                     // تحديث عنوان الصفحة
-                    pageTitle.textContent = item.querySelector('span').textContent;
+                    const menuItem = document.querySelector(`.menu-item[data-tab="${e.state.tab}"]`);
+                    if (menuItem) {
+                        pageTitle.textContent = menuItem.querySelector('span').textContent;
+                        
+                        // تحديث العنصر النشط في القائمة الجانبية
+                        menuItems.forEach(item => item.classList.remove('active'));
+                        menuItem.classList.add('active');
+                    }
+                    
+                    // إذا كانت صفحة مقال مفرد
+                    if (e.state.tab === 'single-article' && e.state.articleId) {
+                        showArticle(e.state.articleId);
+                    }
+                }
+            });
+
+            // معالجة إنشاء منشور جديد
+            const postInput = document.querySelector('.post-input textarea');
+            if (postInput) {
+                postInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        createPost();
+                    }
                 });
             }
-        });
 
-        // تبديل بين تبويبات الملف الشخصي
-        profileTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // إزالة التنشيط من جميع العناصر
-                profileTabs.forEach(t => t.classList.remove('active'));
-                
-                // تنشيط العنصر الحالي
-                tab.classList.add('active');
-                
-                // إخفاء جميع المحتويات
-                profileTabContents.forEach(content => content.classList.add('hidden'));
-                
-                // إظهار المحتوى المطلوب
-                const tabId = `profile-${tab.dataset.profileTab}`;
-                document.getElementById(tabId).classList.remove('hidden');
+            // معالجة إجراءات المنشور
+            const postActions = document.querySelectorAll('.post-action');
+            postActions.forEach(action => {
+                action.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const type = action.querySelector('span').textContent;
+                    alert(`سيتم إضافة ${type} إلى المنشور في التطبيق الفعلي`);
+                });
             });
-        });
+        }
 
         // عرض لوحة التحكم
         function showDashboard(user) {
@@ -1639,11 +3130,138 @@
             if (user.photoURL) {
                 userAvatar.style.backgroundImage = `url(${user.photoURL})`;
                 currentUserAvatar.src = user.photoURL;
+                document.getElementById('profile-avatar').src = user.photoURL;
             } else {
                 // استخدام الحرف الأول من الاسم إذا لم تكن هناك صورة
                 const name = user.displayName || user.email;
                 userAvatar.textContent = name ? name.charAt(0).toUpperCase() : 'U';
             }
+            
+            // تحديث معلومات المستخدم
+            if (user.displayName) {
+                document.getElementById('profile-name').textContent = user.displayName;
+            }
+            
+            if (user.email) {
+                document.getElementById('user-email').textContent = user.email;
+            }
+            
+            // تحميل الطلبات الخاصة بالمستخدم
+            loadUserRequests();
+        }
+
+        // تحميل طلبات المستخدم
+        function loadUserRequests() {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            const requestsList = document.getElementById('user-requests');
+            if (!requestsList) return;
+            
+            requestsList.innerHTML = '<h2>طلباتي السابقة</h2>';
+            
+            // في التطبيق الفعلي، هنا سيتم جلب الطلبات من قاعدة البيانات
+            // هذا مثال للبيانات الوهمية
+            const mockRequests = [
+                {
+                    id: '1',
+                    projectName: 'موقع متجر إلكتروني للملابس',
+                    projectType: 'ecommerce',
+                    projectDescription: 'أحتاج إلى موقع متجر إلكتروني لعرض وبيع الملابس الرجالية. يجب أن يحتوي على نظام دفع إلكتروني، صفحة لكل منتج، نظام تقييم، وإمكانية تتبع الطلبات.',
+                    projectBudget: '$1500',
+                    createdAt: new Date('2023-05-15'),
+                    status: 'completed'
+                },
+                {
+                    id: '2',
+                    projectName: 'موقع شخصي لعرض الأعمال',
+                    projectType: 'portfolio',
+                    projectDescription: 'أبحث عن مصمم لإنشاء موقع شخصي لعرض أعمالي في التصميم الجرافيكي. يجب أن يحتوي على معرض لأعمالي، معلومات عني، وسيلة للتواصل، ومدونة بسيطة.',
+                    projectBudget: '$800',
+                    createdAt: new Date('2023-06-02'),
+                    status: 'in-progress'
+                },
+                {
+                    id: '3',
+                    projectName: 'تطبيق ويب لإدارة المهام',
+                    projectType: 'webapp',
+                    projectDescription: 'أحتاج إلى تطبيق ويب متكامل لإدارة المهام لفريق العمل الخاص بي. يجب أن يحتوي على ميزات مثل إنشاء المهام، تعيينها لأعضاء الفريق، متابعة التقدم، وإشعارات.',
+                    projectBudget: '$2000',
+                    createdAt: new Date('2023-06-10'),
+                    status: 'pending'
+                }
+            ];
+            
+            if (mockRequests.length === 0) {
+                requestsList.innerHTML += '<p>لا توجد طلبات سابقة</p>';
+                return;
+            }
+            
+            mockRequests.forEach(request => {
+                const statusClass = `status-${request.status.replace(' ', '-')}`;
+                const statusText = getStatusText(request.status);
+                const formattedDate = formatDate(request.createdAt);
+                
+                const requestItem = document.createElement('div');
+                requestItem.className = 'request-item';
+                requestItem.innerHTML = `
+                    <div class="request-header">
+                        <h3 class="request-title">${request.projectName}</h3>
+                        <span class="request-status ${statusClass}">${statusText}</span>
+                    </div>
+                    <div class="request-meta">
+                        <span>تم الإنشاء: ${formattedDate}</span>
+                        ${request.projectBudget ? `<span>الميزانية: ${request.projectBudget}</span>` : ''}
+                    </div>
+                    <div class="request-description">
+                        <p>${request.projectDescription}</p>
+                    </div>
+                    <div class="request-actions">
+                        <button class="action-btn view-btn">عرض التفاصيل</button>
+                        <button class="action-btn delete-btn" data-id="${request.id}">حذف</button>
+                    </div>
+                `;
+                
+                requestsList.appendChild(requestItem);
+                
+                // إضافة معالجات الأحداث لأزرار الحذف
+                const deleteBtn = requestItem.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', () => {
+                    deleteRequest(deleteBtn.dataset.id);
+                });
+            });
+        }
+
+        // حذف طلب
+        function deleteRequest(requestId) {
+            if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
+                // في التطبيق الفعلي، هنا سيتم حذف الطلب من قاعدة البيانات
+                alert(`سيتم حذف الطلب رقم ${requestId} في التطبيق الفعلي`);
+                loadUserRequests();
+            }
+        }
+
+        // الإعجاب بمنشور
+        function likePost(postId) {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            // في التطبيق الفعلي، هنا سيتم تحديث عدد الإعجابات في قاعدة البيانات
+            alert(`سيتم تسجيل إعجابك بالمنشور رقم ${postId} في التطبيق الفعلي`);
+        }
+
+        // إنشاء منشور جديد
+        function createPost() {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            const postInput = document.querySelector('.post-input textarea');
+            const content = postInput.value.trim();
+            if (!content) return;
+            
+            // في التطبيق الفعلي، هنا سيتم حفظ المنشور في قاعدة البيانات
+            alert('سيتم نشر منشورك في التطبيق الفعلي');
+            postInput.value = '';
         }
 
         // عرض نموذج تسجيل الدخول
@@ -1667,141 +3285,6 @@
             forgotPasswordForm.classList.remove('hidden');
         }
 
-        // التحقق من حالة المصادقة عند تحميل الصفحة
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                showDashboard(user);
-            } else {
-                authPage.classList.remove('hidden');
-                dashboard.classList.add('hidden');
-                showLoginForm();
-            }
-        });
-
-        // إدارة طلبات الويب
-        const requestForm = document.getElementById('request-form');
-        requestForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            const projectName = document.getElementById('project-name').value;
-            const projectType = document.getElementById('project-type').value;
-            const projectDescription = document.getElementById('project-description').value;
-            const projectBudget = document.getElementById('project-budget').value;
-            const projectDeadline = document.getElementById('project-deadline').value;
-            const projectNotes = document.getElementById('project-notes').value;
-            
-            db.collection('webRequests').add({
-                userId: user.uid,
-                projectName: projectName,
-                projectType: projectType,
-                projectDescription: projectDescription,
-                projectBudget: projectBudget,
-                projectDeadline: projectDeadline,
-                projectNotes: projectNotes,
-                status: 'pending',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert('تم إرسال طلبك بنجاح!');
-                requestForm.reset();
-                
-                // إرسال البريد الإلكتروني (هنا يمكنك استخدام خدمة مثل SendGrid)
-                sendEmailToAdmin(user.email, projectName, projectDescription);
-            })
-            .catch((error) => {
-                alert('حدث خطأ أثناء إرسال الطلب: ' + error.message);
-            });
-        });
-
-        // وظيفة لإرسال البريد الإلكتروني (وهمية - تحتاج إلى تنفيذ حقيقي باستخدام خدمة مثل SendGrid)
-        function sendEmailToAdmin(userEmail, projectName, projectDescription) {
-            console.log('إرسال بريد إلى المدير:', {
-                to: 'omar.elmallah2011@gmail.com',
-                subject: `طلب موقع جديد: ${projectName}`,
-                text: `تم استلام طلب موقع جديد من ${userEmail}:\n\n${projectDescription}`
-            });
-            
-            // في الواقع، هنا ستستخدم خدمة إرسال بريد إلكتروني
-            // يمكنك استخدام Cloud Functions لتنفيذ هذا
-        }
-
-        // تحميل طلبات المستخدم
-        function loadUserRequests() {
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            db.collection('webRequests')
-                .where('userId', '==', user.uid)
-                .orderBy('createdAt', 'desc')
-                .get()
-                .then((querySnapshot) => {
-                    const requestsList = document.querySelector('.requests-list');
-                    requestsList.innerHTML = '<h2>طلباتي السابقة</h2>';
-                    
-                    if (querySnapshot.empty) {
-                        requestsList.innerHTML += '<p>لا توجد طلبات سابقة</p>';
-                        return;
-                    }
-                    
-                    querySnapshot.forEach((doc) => {
-                        const request = doc.data();
-                        const requestId = doc.id;
-                        
-                        const statusClass = `status-${request.status.replace(' ', '-')}`;
-                        
-                        const requestItem = document.createElement('div');
-                        requestItem.className = 'request-item';
-                        requestItem.innerHTML = `
-                            <div class="request-header">
-                                <h3 class="request-title">${request.projectName}</h3>
-                                <span class="request-status ${statusClass}">${getStatusText(request.status)}</span>
-                            </div>
-                            <div class="request-meta">
-                                <span>تم الإنشاء: ${formatDate(request.createdAt?.toDate())}</span>
-                                ${request.projectBudget ? `<span>الميزانية: ${request.projectBudget}</span>` : ''}
-                            </div>
-                            <div class="request-description">
-                                <p>${request.projectDescription}</p>
-                            </div>
-                            <div class="request-actions">
-                                <button class="action-btn view-btn">عرض التفاصيل</button>
-                                <button class="action-btn delete-btn" data-id="${requestId}">حذف</button>
-                            </div>
-                        `;
-                        
-                        requestsList.appendChild(requestItem);
-                    });
-                    
-                    // إضافة معالجات الأحداث لأزرار الحذف
-                    document.querySelectorAll('.delete-btn').forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            const requestId = btn.dataset.id;
-                            deleteRequest(requestId);
-                        });
-                    });
-                })
-                .catch((error) => {
-                    console.error('Error loading requests: ', error);
-                });
-        }
-
-        // حذف طلب
-        function deleteRequest(requestId) {
-            if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
-                db.collection('webRequests').doc(requestId).delete()
-                    .then(() => {
-                        alert('تم حذف الطلب بنجاح');
-                        loadUserRequests();
-                    })
-                    .catch((error) => {
-                        alert('حدث خطأ أثناء حذف الطلب: ' + error.message);
-                    });
-            }
-        }
-
         // تحويل حالة الطلب إلى نص
         function getStatusText(status) {
             const statusMap = {
@@ -1818,177 +3301,48 @@
             return date.toLocaleDateString('ar-EG');
         }
 
-        // تحميل المنشورات
-        function loadPosts() {
-            db.collection('posts')
-                .orderBy('createdAt', 'desc')
-                .limit(10)
-                .get()
-                .then((querySnapshot) => {
-                    const postsContainer = document.querySelector('.posts-container');
-                    // مسح المنشورات القديمة (باستثناء نموذج إنشاء المنشور)
-                    const createPost = postsContainer.querySelector('.create-post');
-                    postsContainer.innerHTML = '';
-                    postsContainer.appendChild(createPost);
+        // التحقق من حالة المصادقة عند تحميل الصفحة
+        function checkAuthState() {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    showDashboard(user);
+                } else {
+                    authPage.classList.remove('hidden');
+                    dashboard.classList.add('hidden');
+                    showLoginForm();
                     
-                    if (querySnapshot.empty) {
-                        postsContainer.innerHTML += '<p>لا توجد منشورات بعد</p>';
-                        return;
+                    // معالجة الروابط القانونية
+                    const hash = window.location.hash.substring(1);
+                    if (legalPages[hash]) {
+                        showLegalPage(hash);
                     }
-                    
-                    querySnapshot.forEach((doc) => {
-                        const post = doc.data();
-                        const postId = doc.id;
-                        
-                        const postElement = document.createElement('div');
-                        postElement.className = 'post';
-                        postElement.innerHTML = `
-                            <div class="post-header">
-                                <img src="${post.authorPhoto || 'https://via.placeholder.com/40'}" alt="User Avatar">
-                                <div class="post-user">
-                                    <h4>${post.authorName}</h4>
-                                    <span>${formatTime(post.createdAt?.toDate())}</span>
-                                </div>
-                                <div class="post-menu">
-                                    <i class="fas fa-ellipsis-h"></i>
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <p>${post.content}</p>
-                                ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Post Image" class="post-image">` : ''}
-                                ${post.code ? `<pre><code>${post.code}</code></pre>` : ''}
-                            </div>
-                            <div class="post-footer">
-                                <div class="post-like" data-id="${postId}">
-                                    <i class="far fa-heart"></i>
-                                    <span>${post.likes || 0} إعجاب</span>
-                                </div>
-                                <div class="post-comment">
-                                    <i class="far fa-comment"></i>
-                                    <span>${post.comments || 0} تعليقات</span>
-                                </div>
-                                <div class="post-share">
-                                    <i class="fas fa-share"></i>
-                                    <span>مشاركة</span>
-                                </div>
-                            </div>
-                        `;
-                        
-                        postsContainer.appendChild(postElement);
-                    });
-                    
-                    // إضافة معالجات الأحداث لأزرار الإعجاب
-                    document.querySelectorAll('.post-like').forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            const postId = btn.dataset.id;
-                            likePost(postId);
-                        });
-                    });
-                })
-                .catch((error) => {
-                    console.error('Error loading posts: ', error);
-                });
-        }
-
-        // الإعجاب بمنشور
-        function likePost(postId) {
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            const postRef = db.collection('posts').doc(postId);
-            
-            db.runTransaction((transaction) => {
-                return transaction.get(postRef).then((postDoc) => {
-                    if (!postDoc.exists) {
-                        throw new Error('المنشور غير موجود');
-                    }
-                    
-                    const postData = postDoc.data();
-                    const likes = postData.likes || 0;
-                    
-                    transaction.update(postRef, {
-                        likes: likes + 1
-                    });
-                });
-            })
-            .then(() => {
-                console.log('تم تحديث عدد الإعجابات بنجاح');
-                loadPosts();
-            })
-            .catch((error) => {
-                console.error('Error liking post: ', error);
+                }
             });
         }
 
-        // تنسيق الوقت (منذ كم دقيقة/ساعة/يوم)
-        function formatTime(date) {
-            if (!date) return '';
+        // عرض صفحة قانونية
+        function showLegalPage(page) {
+            if (!legalPages[page]) return;
             
-            const now = new Date();
-            const diff = now - date;
-            const seconds = Math.floor(diff / 1000);
-            const minutes = Math.floor(seconds / 60);
-            const hours = Math.floor(minutes / 60);
-            const days = Math.floor(hours / 24);
+            const legalContent = document.getElementById('legal-content');
+            legalContent.innerHTML = `
+                <h1>${legalPages[page].title}</h1>
+                ${legalPages[page].content}
+            `;
             
-            if (days > 0) return `منذ ${days} يوم`;
-            if (hours > 0) return `منذ ${hours} ساعة`;
-            if (minutes > 0) return `منذ ${minutes} دقيقة`;
-            return 'الآن';
+            // إظهار تبويب الصفحات القانونية وإخفاء الآخرين
+            tabContents.forEach(content => content.classList.add('hidden'));
+            document.getElementById('legal-tab').classList.remove('hidden');
+            
+            // تحديث عنوان الصفحة
+            pageTitle.textContent = legalPages[page].title;
+            
+            // إضافة سجل للصفحة الحالية في التاريخ
+            window.history.pushState({ tab: 'legal', page }, '', `#${page}`);
         }
 
-        // إنشاء منشور جديد
-        const postInput = document.querySelector('.post-input textarea');
-        const postActions = document.querySelectorAll('.post-action');
-        
-        postInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                createPost();
-            }
-        });
-        
-        postActions.forEach(action => {
-            action.addEventListener('click', (e) => {
-                e.preventDefault();
-                const type = action.querySelector('span').textContent;
-                alert(`سيتم إضافة ${type} إلى المنشور`);
-            });
-        });
-
-        function createPost() {
-            const user = auth.currentUser;
-            if (!user) return;
-            
-            const content = postInput.value.trim();
-            if (!content) return;
-            
-            db.collection('posts').add({
-                authorId: user.uid,
-                authorName: user.displayName || user.email,
-                authorPhoto: user.photoURL,
-                content: content,
-                likes: 0,
-                comments: 0,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                postInput.value = '';
-                loadPosts();
-            })
-            .catch((error) => {
-                alert('حدث خطأ أثناء نشر المنشور: ' + error.message);
-            });
-        }
-
-        // تحميل البيانات الأولية عند تسجيل الدخول
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                showDashboard(user);
-                loadPosts();
-                loadUserRequests();
-            }
-        });
+        // تهيئة التطبيق عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
